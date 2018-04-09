@@ -4,6 +4,7 @@
 
 # dependencies
 /node_modules
+/материалы по стажировке
 
 # testing
 /coverage
