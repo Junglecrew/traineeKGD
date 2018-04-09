@@ -1,0 +1,16 @@
+.point-header {
+  display: flex;
+  justify-content: space-between; }
+  .point-header__category {
+    margin-bottom: 5px; }
+
+.category {
+  display: flex; }
+  .category__category-image {
+    height: 25px;
+    width: 25px; }
+  .category__place-title {
+    margin-left: 15px;
+    color: gray;
+    font-size: 12px;
+    line-height: 25px; }

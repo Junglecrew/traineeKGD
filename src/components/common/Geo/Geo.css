@@ -1,0 +1,8 @@
+.geo {
+  display: flex; }
+  .geo__logo {
+    margin-right: 5px; }
+  .geo__range {
+    line-height: 24px;
+    color: red;
+    font-weight: bold; }

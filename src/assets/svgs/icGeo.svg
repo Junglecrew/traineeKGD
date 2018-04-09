@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>icGeo</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icGeo">
+            <g id="noun_144744_cc" transform="translate(5.000000, 2.000000)" fill-rule="nonzero" fill="#F33D41">
+                <path d="M6.83529412,0 C3.08823529,0 0,3.08333333 0,6.91666667 C0,10.5833333 6.25882353,18.8333333 6.50588235,19.1666667 L6.83529412,19.5833333 L7.16470588,19.1666667 C7.41176471,18.8333333 13.6705882,10.5833333 13.6705882,6.91666667 C13.6705882,3.08333333 10.5823529,0 6.83529412,0 Z M6.83529412,4.04166667 C8.4,4.04166667 9.67647059,5.33333333 9.67647059,6.91666667 C9.67647059,8.5 8.4,9.79166667 6.83529412,9.79166667 C5.27058824,9.79166667 3.99411765,8.5 3.99411765,6.91666667 C3.99411765,5.33333333 5.27058824,4.04166667 6.83529412,4.04166667 Z" id="Shape"></path>
+            </g>
+            <rect id="bounds" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

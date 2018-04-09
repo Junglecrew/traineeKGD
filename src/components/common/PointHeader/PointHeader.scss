@@ -1,0 +1,21 @@
+.point-header {
+	display: flex;
+	justify-content: space-between;
+	&__category {
+		margin-bottom: 5px;
+	}
+}
+
+.category {
+	display: flex;
+	&__category-image {
+		height: 25px;
+		width: 25px;
+	}
+	&__place-title {
+		margin-left: 15px;
+		color: gray;
+		font-size: 12px;
+		line-height: 25px;
+	}
+}

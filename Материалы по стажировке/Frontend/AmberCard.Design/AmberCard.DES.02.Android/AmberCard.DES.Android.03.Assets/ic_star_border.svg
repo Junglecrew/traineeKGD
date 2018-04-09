@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>ic_star_border</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="ic_star_border">
+            <g id="ic_star_border_black_24px" transform="translate(0.000000, 1.000000)" fill-rule="nonzero" fill="#F33D41">
+                <path d="M19.7222222,7.25304348 L12.7319444,6.65550725 L10,0.275362319 L7.26805556,6.66514493 L0.277777778,7.25304348 L5.58611111,11.8116667 L3.99166667,18.5869565 L10,14.9921014 L16.0083333,18.5869565 L14.4236111,11.8116667 L19.7222222,7.25304348 Z M10,13.1898551 L6.34444444,15.3776087 L7.31666667,11.2526812 L4.08888889,8.47702899 L8.34722222,8.1107971 L10,4.22681159 L11.6625,8.12043478 L15.9208333,8.48666667 L12.6930556,11.2623188 L13.6652778,15.3872464 L10,13.1898551 Z" id="Shape"></path>
+            </g>
+            <rect id="bounds" x="0" y="0" width="20" height="20"></rect>
+        </g>
+    </g>
+</svg>

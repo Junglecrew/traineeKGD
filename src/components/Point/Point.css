@@ -1,0 +1,23 @@
+.point {
+  position: relative; }
+  .point__main-content {
+    margin-left: 17px; }
+  .point__link {
+    text-decoration: none;
+    color: black; }
+  .point__discount {
+    background-color: red;
+    color: white;
+    height: 25px;
+    line-height: 25px;
+    min-width: 50px;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0; }
+    .point__discount:before {
+      content: '';
+      position: absolute;
+      border: 12px solid transparent;
+      border-left: 10px solid white;
+      left: 0; }
