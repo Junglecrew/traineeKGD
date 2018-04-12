@@ -7,27 +7,18 @@ import './Point.css'
 class Point extends Component {
 	static propTypes = {
 		data: PropTypes.object.isRequired,
-
 };
 
 	getBody() {
 		const {data} = this.props
-		console.log(data)
 		const point = 
 		<div className="point">
 			<div className="point__main-content">
-				<PointHeader 
-					// category={data.ActualCategory}
-					id = {data.category_id} 
-				/>
-				<PointContent 
-					content = {data}
-				/>
-				
+				<PointHeader id = {data.category_id} />
+				<PointContent content = {data} />
 				<hr/>
 			</div>
-			
-			<div className="point__discount">-{data.discount_max}%</div>
+			{ data.discount_max>0 ? <div className="point__discount">-{data.discount_max}%</div> : <div></div>}
 		</div>
 		return point
 	}

@@ -61,7 +61,7 @@ export default class PointScreen extends Component {
 							</div>
 							<Rating rate={rate} />
 						</div>
-						<div className="point-title">{name}</div>
+						<h3 className="point-title">{name}</h3>
 						<div className="point-description">{description}</div>
 						<div className="point-schedule">
 							<span>Режим работы: </span>

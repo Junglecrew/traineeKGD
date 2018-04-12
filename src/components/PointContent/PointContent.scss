@@ -1,3 +1,14 @@
+@import 'src/index.scss';
+
+.point-short {
+  hr {
+    color: red;
+  }
+}
 .point-short__content {
   width: 85%;
+    p {
+    font-family: $main-content-text;
+    color: $main-point-text;
+    }
 }

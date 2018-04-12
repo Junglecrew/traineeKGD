@@ -2,6 +2,11 @@
   position: relative; }
   .point__main-content {
     margin-left: 17px; }
+    .point__main-content hr {
+      color: #d9d9d9;
+      background-color: #d9d9d9;
+      border: 0;
+      height: 1px; }
   .point__link {
     text-decoration: none;
     color: black; }

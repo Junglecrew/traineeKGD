@@ -1,3 +1,5 @@
+@import 'src/index.scss';
+
 .point-photo {
   position: relative;
 }
@@ -39,19 +41,34 @@
 
 .point-description {
   margin: 20px 0;
+  font-family: $main-content-text;
+  font-size: 17px;
+  line-height: 22px;
 }
 
 .point-schedule {
   margin-bottom: 20px;
+  font-size: 17px;
+  line-height: 24px;
+  font-family: $main-content-text;
+  color: $main-point-text;
   & span {
-    font-weight: bold;
+    font-weight: 600;
+    color: $h3-color;
+    font-family: $main-content-text;
   }
 }
 
 .point-prices {
   margin-bottom: 20px;
+  font-size: 17px;
+  line-height: 24px;
+  font-family: $main-content-text;
+  color: $main-point-text;
   & span {
-    font-weight: bold;
+    font-weight: 600;
+    color: $h3-color;
+    font-family: $main-content-text;
   }
   &:after {
     content: '';
@@ -67,6 +84,9 @@
 .point-phone {
   display: flex;
   margin-bottom: 20px;
+  color: $main-point-text;
+  font-family: $main-content-text;
+
   &:after {
     content: '';
     border-bottom: 1px solid black;

@@ -1,3 +1,5 @@
+@import 'src/index.scss';
+
 .places-list {
 	border-radius: 5px;
 	background-color: #fff;
@@ -9,4 +11,33 @@
 		}
 	}
 
+}
+
+.filter-bar {
+	height: 45px;
+	border-bottom: 1px solid #d9d9d9;
+	width: 100%;
+	color: $red;
+	text-align: right;
+	display: none;
+	top: 0;
+	z-index: 999;
+	background-color: #fff;
+	position: fixed;
+
+	&__content {
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
+		line-height: 45px;
+		font-size: 17px;
+	}
+	&__logo {
+		background-image: url('../../assets/img/crown@2x.png');
+		width: 50px;
+		background-position: center;
+		background-size: contain;
+		background-repeat: no-repeat
+	}
 }

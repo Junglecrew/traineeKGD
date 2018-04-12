@@ -2,6 +2,12 @@
 	position: relative;
 	&__main-content {
 		margin-left: 17px;
+		hr {
+			color: rgba(217,217,217,1);
+			background-color: rgba(217,217,217,1);
+			border: 0;
+			height: 1px;
+		}
 	}
 	&__link {
 		text-decoration: none;

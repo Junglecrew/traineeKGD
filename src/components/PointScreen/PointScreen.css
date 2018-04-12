@@ -1,3 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
+@import url("https://fonts.googleapis.com/css?family=Yeseva+One");
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eaeaea;
+  color: #64686a; }
+
+h3 {
+  font-family: "Yeseva One", cursive;
+  font-size: 21px;
+  color: #383d41; }
+
 .point-photo {
   position: relative; }
 
@@ -33,17 +47,32 @@
   margin: 20px 0; }
 
 .point-description {
-  margin: 20px 0; }
+  margin: 20px 0;
+  font-family: "Open Sans", sans-serif;
+  font-size: 17px;
+  line-height: 22px; }
 
 .point-schedule {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  font-size: 17px;
+  line-height: 24px;
+  font-family: "Open Sans", sans-serif;
+  color: #64686a; }
   .point-schedule span {
-    font-weight: bold; }
+    font-weight: 600;
+    color: #383d41;
+    font-family: "Open Sans", sans-serif; }
 
 .point-prices {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  font-size: 17px;
+  line-height: 24px;
+  font-family: "Open Sans", sans-serif;
+  color: #64686a; }
   .point-prices span {
-    font-weight: bold; }
+    font-weight: 600;
+    color: #383d41;
+    font-family: "Open Sans", sans-serif; }
   .point-prices:after {
     content: '';
     background-color: grey;
@@ -54,7 +83,9 @@
 
 .point-phone {
   display: flex;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  color: #64686a;
+  font-family: "Open Sans", sans-serif; }
   .point-phone:after {
     content: '';
     border-bottom: 1px solid black;
