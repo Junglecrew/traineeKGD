@@ -27,16 +27,16 @@ export default class PointScreen extends Component {
 	}
 
 	componentDidMount() {
-		const {latitude, longitude} = this.state.Point
-		const { PointAddress } = this.state.PointAddress
+		const { latitude, longitude } = this.state.Point
+		// const { PointAddress } = this.state.PointAddress
 		const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
 		const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
 		fetch(api)
 			.then(response => {
-				if (response.status == '200') {
+				if (response.status === 200) {
 					return response.json()
 				} else {
-					throw new Error('Тут напишем позже текст ошибки')
+					throw new Error(`Ответ сервера ${response.status}`)
 				}
 			})
 			.then(data => this.setState({ PointAddress: data.results[0].formatted_address }))
@@ -61,7 +61,7 @@ export default class PointScreen extends Component {
 							</div>
 							<Rating rate={rate} />
 						</div>
-						<h3 className="point-title">{name}</h3>
+						<div className="point-title">{name}</div>
 						<div className="point-description">{description}</div>
 						<div className="point-schedule">
 							<span>Режим работы: </span>

@@ -1,7 +1,55 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
+@import url("https://fonts.googleapis.com/css?family=Yeseva+One");
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #eaeaea;
+  color: #64686a; }
+
+h3 {
+  font-family: "Yeseva One", cursive;
+  font-size: 21px;
+  color: #383d41; }
+
 .filter-screen {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 40vh;
+  height: 100vh;
   z-index: 999;
-  background-color: #fff; }
+  background-color: #fff;
+  display: flex;
+  flex-direction: column; }
+  .filter-screen__header {
+    margin-bottom: 10px;
+    width: 84%;
+    margin: 0 auto;
+    padding-top: 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #383d41;
+    font-weight: 600; }
+
+.close-btn {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  width: 30px;
+  height: 30px; }
+
+.category-list {
+  width: 90%;
+  padding-top: 25px;
+  margin: 0 auto; }
+  .category-list__item {
+    display: block; }
+
+.category-item {
+  display: flex;
+  margin-bottom: 20px; }
+  .category-item__icon {
+    width: 30px;
+    height: 30px; }
+    .category-item__icon img {
+      width: 100%; }

@@ -1,8 +1,52 @@
+@import 'src/index.scss';
+
 .filter-screen {
 	position: absolute;
 	top: 0;
 	width: 100%;
-	height: 40vh;
+	height: 100vh;
 	z-index: 999;
 	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	&__header {
+		margin-bottom: 10px;
+		width: 84%;
+    margin: 0 auto;
+		padding-top: 10px;
+		text-align: center;
+		font-size: 16px;
+		color: $h3-color;
+		font-weight: 600;
+	}
+}
+
+.close-btn {
+	position: absolute;
+	top: 2%;
+	left: 5%;
+	width: 30px;
+	height: 30px;
+}
+
+.category-list {
+	width: 90%;
+	padding-top: 25px;
+	margin: 0 auto;
+	&__item {
+		display: block;
+	}
+}
+
+.category-item {
+	display: flex;
+	margin-bottom: 20px;
+	&__icon {
+		width: 30px;
+		height: 30px;
+		img {
+			width: 100%;
+		}
+	}
+
 }
