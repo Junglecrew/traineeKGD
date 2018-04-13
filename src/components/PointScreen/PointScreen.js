@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import propTypes from 'prop-types'
 import { addAddressToStore, getAddressGoogle } from 'reducers/content/actions'
-import { getContent, getPointsAddresses, getFilteredCategory } from 'reducers/content/selectors'
+import { getContent, getPointsAddresses } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/Rating'
 import Map from 'components/common/Map'
@@ -14,6 +14,7 @@ class PointScreen extends Component {
 		match: propTypes.object.isRequired,
 		pointsAddresses: propTypes.array,
 		getAddressGoogle: propTypes.func.isRequired,
+		pointsList: propTypes.array,
 	}
 
 	componentWillMount() {
@@ -31,28 +32,10 @@ class PointScreen extends Component {
 		const { getAddressGoogle } = this.props
 		const { latitude, longitude, id } = this.state.Point
 		getAddressGoogle(latitude, longitude, id)
-		// const { latitude, longitude, id } = this.state.Point
-		// const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
-		// const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
-		// fetch(api)
-		// 	.then(response => {
-		// 		if (response.status === 200) {
-		// 			return response.json()
-		// 		} else {
-		// 			throw new Error(`Ответ сервера ${response.status}`)
-		// 		}
-		// 	})
-		// 	// .then(data => {
-		// 	// 	this.setState({ PointAddress: data.results[0].formatted_address })
-		// 	// })
-		// 	.then(data => this.props.addAddressToStore([{ id: id, PointAddress: data.results[0].formatted_address }]))
-
-		console.log(this.props.pointsAddresses)
 	}
 
 	getBody() {
 		const { category_id, photos, rate, name, description, description_2, cost_text, phone } = this.state.Point
-		const { PointAddress } = this.state
 		const { pointsAddresses } = this.props
 		console.log(pointsAddresses)
 		return (
@@ -107,7 +90,7 @@ class PointScreen extends Component {
 			return <div>{pointDetails.PointAddress}</div>
 		}
 	}
- 	// getAddress() {
+	// getAddress() {
 	// 	const { id } = this.state.Point
 	// 	const { pointsAddresses } = this.props
 	// 	pointsAddresses.filter(item => item.id === id)

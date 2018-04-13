@@ -1,9 +1,9 @@
 import * as types from './types'
 import { API_URL, API_VERSION, API_TOKEN } from 'config'
-import { getIsNeedUpdate, getLastUpdate, getFilteredCategory } from './selectors'
-import configureStore from 'store/configureStore'
+import { getIsNeedUpdate } from './selectors'
+// import configureStore from 'store/configureStore'
 
-const { store } = configureStore()
+// const { store } = configureStore()
 
 export const contentStart = () => ({
 	type: types.CONTENT_START,

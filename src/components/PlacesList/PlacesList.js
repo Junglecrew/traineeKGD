@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
+
 import './PlacesList.css'
 import Point from 'components/Point'
 import Filter from 'components/Filter'
 import { contentThunk } from 'reducers/content/actions'
-import { getContent, getFilteredCategory } from 'reducers/content/selectors'
+import { getContent, getFilteredCategory, getIsFetching } from 'reducers/content/selectors'
 
 class PlacesList extends Component {
 	state = {
@@ -13,13 +14,12 @@ class PlacesList extends Component {
 	}
 
 	static propTypes = {
-		pointsList: propTypes.array.isRequired,
-		filteredCategory: propTypes.array.isRequired,
+		pointsList: propTypes.array,
+		filteredCategory: propTypes.number,
 		contentThunk: propTypes.func.isRequired,
 	}
 
 	componentDidMount() {
-		console.log(this.props)
 		const { contentThunk } = this.props
 		contentThunk()
 		window.addEventListener('scroll', this.getFilterBar)
@@ -34,17 +34,17 @@ class PlacesList extends Component {
 		const filterBar = document.getElementsByClassName('filter-bar')[0]
 		const trigger = pointsBlock.getBoundingClientRect().top
 		if (trigger < 200) {
-			filterBar.style.display = 'block'
+			filterBar.style.top = '0'
 		} else {
-			filterBar.style.display = 'none'
+			filterBar.style.top = '-45px'
 		}
 	}
 
 	getPointsList() {
 		const { pointsList, filteredCategory } = this.props
-		const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory[0]))
+		const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory))
 
-		if (filteredCategory.length == 0) {
+		if (filteredCategory === null) {
 			const data = pointsList.map(item => (
 				<div className="places-list__item" key={item.id}>
 					<Point data={item} />
@@ -62,7 +62,7 @@ class PlacesList extends Component {
 	}
 
 	getFilterWindow = () => {
-		if (document.body.style.position == 'fixed') {
+		if (document.body.style.position === 'fixed') {
 			document.body.style.position = 'static'
 		} else {
 			document.body.style.position = 'fixed'
@@ -73,7 +73,7 @@ class PlacesList extends Component {
 
 	render() {
 		const { showFilter } = this.state
-		const { pointsList } = this.props
+		const { pointsList, ifFetching } = this.props
 		return (
 			<Fragment>
 				<div className="filter-bar">
@@ -83,6 +83,7 @@ class PlacesList extends Component {
 					</div>
 				</div>
 				<div>{showFilter && <Filter showFilter={this.state.showFilter} getFilterWindow={this.getFilterWindow} />}</div>
+
 				{pointsList !== undefined ? <div className="places-list">{this.getPointsList()}</div> : <div>Загрузка</div>}
 			</Fragment>
 		)
@@ -93,6 +94,7 @@ const mapStateToProps = state => {
 	return {
 		pointsList: getContent(state).points,
 		filteredCategory: getFilteredCategory(state),
+		ifFetching: getIsFetching(state),
 	}
 }
 

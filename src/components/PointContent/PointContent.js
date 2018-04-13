@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import './PointContent.css'
 import Geo from '/components/common/Geo'
 
-
 class PointContent extends Component {
 	static propTypes = {
-		content: PropTypes.object.isRequired
-};
+		content: PropTypes.object.isRequired,
+	}
 
 	getShortDescr() {
 		const { content } = this.props
 		const shortDescr = <p>{content.description.substring(0, 53)}...</p>
 		return shortDescr
 	}
-	
+
 	getTitle() {
 		const { content } = this.props
 		const title = <h3>{content.name}</h3>
@@ -31,14 +30,11 @@ class PointContent extends Component {
 						{this.getTitle()}
 					</Link>
 					{this.getShortDescr()}
-					<Geo 
-						latitude={content.latitude} 
-						longitude={content.longitude}
-					/>
+					<Geo latitude={content.latitude} longitude={content.longitude} />
 				</div>
 			</div>
-		);
+		)
 	}
 }
 
-export default PointContent;
+export default PointContent

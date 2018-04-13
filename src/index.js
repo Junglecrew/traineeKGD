@@ -11,15 +11,15 @@ import Router from './router'
 const { store, persistor } = configureStore()
 
 class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <Router />
-        </PersistGate>
-      </Provider>
-    )
-  }
+	render() {
+		return (
+			<Provider store={store}>
+				<PersistGate loading={null} persistor={persistor}>
+					<Router />
+				</PersistGate>
+			</Provider>
+		)
+	}
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

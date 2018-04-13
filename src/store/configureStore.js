@@ -10,16 +10,16 @@ const sagaMiddleware = createSagaMiddleWare()
 const middlewares = [sagaMiddleware, thunk]
 
 const persistConfig = {
-  key: 'redux.store.kode.trainee',
-  storage,
+	key: 'redux.store.kode.trainee',
+	storage,
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const enhancer = composeWithDevTools({})(applyMiddleware(...middlewares))
 
 export default function configureStore(initialState) {
-  const store = createStore(persistedReducer, initialState, enhancer)
-  const persistor = persistStore(store)
+	const store = createStore(persistedReducer, initialState, enhancer)
+	const persistor = persistStore(store)
 
-  return { store, persistor }
+	return { store, persistor }
 }

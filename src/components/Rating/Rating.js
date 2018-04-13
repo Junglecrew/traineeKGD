@@ -17,7 +17,7 @@ export default class Rating extends Component {
 		}
 		return stars.map((item, index) => (
 			<span key={index}>
-				<img src={star} />
+				<img src={star} alt="рейтинг" />
 			</span>
 		))
 	}
@@ -32,7 +32,7 @@ export default class Rating extends Component {
 		}
 		return emptyStars.map((item, index) => (
 			<span key={index}>
-				<img src={emptyStar} alt="пустая звезда"/>
+				<img src={emptyStar} alt="пустая звезда" />
 			</span>
 		))
 	}

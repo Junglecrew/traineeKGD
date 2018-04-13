@@ -27,11 +27,12 @@ h3 {
   width: 100%;
   color: #f33d41;
   text-align: right;
-  display: none;
-  top: 0;
+  display: block;
+  top: -45px;
   z-index: 999;
   background-color: #fff;
-  position: fixed; }
+  position: fixed;
+  transition: .5s; }
   .filter-bar__content {
     margin: 0 auto;
     display: flex;

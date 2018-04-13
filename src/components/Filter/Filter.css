@@ -58,3 +58,24 @@ h3 {
 
 .active {
   color: #f33d41; }
+
+.filterwindow-enter {
+  opacity: 0.01; }
+
+.ffilterwindow-enter.filterwindow-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in; }
+
+.filterwindow-appear {
+  opacity: 0.01; }
+
+.filterwindow-appear.filterwindow-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in; }
+
+.filterwindow-leave {
+  opacity: 1; }
+
+.filterwindow-leave.filterwindow-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in; }

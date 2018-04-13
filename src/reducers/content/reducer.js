@@ -5,7 +5,7 @@ const initialState = {
 	error: null,
 	payload: [],
 	lastUpdate: null,
-	filteredCategory: [],
+	filteredCategory: null,
 	pointsAddresses: [],
 }
 
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
 				...state,
 				isFetching: true,
 				error: null,
-				filteredCategory: [],
+				filteredCategory: null,
 			}
 		case types.CONTENT_SUCCESS:
 			return {
@@ -25,7 +25,6 @@ export default (state = initialState, action) => {
 				error: null,
 				payload: action.payload,
 				lastUpdate: action.lastUpdate,
-				pointsAddresses: [],
 			}
 		case types.CONTENT_ERROR:
 			return {
@@ -43,26 +42,13 @@ export default (state = initialState, action) => {
 		case types.CLEAR_FILTER:
 			return {
 				...state,
-				filteredCategory: [],
+				filteredCategory: null,
 			}
-
 		case types.ADD_POINT_ADDRESS:
 			return {
 				...state,
-				pointsAddresses: [
-					...state.pointsAddresses,
-					{
-						id: action.payload[0].id,
-						PointAddress: action.payload[0].PointAddress,
-					},
-				],
+				pointsAddresses: action.payload,
 			}
-		// case types.ADD_POINT_ADDRESS:
-		// 	return {
-		// 		...state,
-		// 		pointsAddresses: action.payload,
-		// 	}
-
 		default:
 			return state
 	}
