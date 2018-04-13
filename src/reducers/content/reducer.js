@@ -25,6 +25,7 @@ export default (state = initialState, action) => {
 				error: null,
 				payload: action.payload,
 				lastUpdate: action.lastUpdate,
+				pointsAddresses: [],
 			}
 		case types.CONTENT_ERROR:
 			return {
@@ -47,7 +48,7 @@ export default (state = initialState, action) => {
 		case types.ADD_POINT_ADDRESS:
 			return {
 				...state,
-				pointsAddresses: action.payload
+				pointsAddresses: action.payload,
 			}
 
 		default:

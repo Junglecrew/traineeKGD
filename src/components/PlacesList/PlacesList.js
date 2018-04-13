@@ -7,7 +7,6 @@ import Filter from 'components/Filter'
 import { contentThunk } from 'reducers/content/actions'
 import { getContent, getFilteredCategory } from 'reducers/content/selectors'
 
-
 class PlacesList extends Component {
 	state = {
 		showFilter: false,
@@ -16,6 +15,7 @@ class PlacesList extends Component {
 	static propTypes = {
 		pointsList: propTypes.array.isRequired,
 		filteredCategory: propTypes.array.isRequired,
+		contentThunk: propTypes.func.isRequired,
 	}
 
 	componentDidMount() {
@@ -43,7 +43,6 @@ class PlacesList extends Component {
 	getPointsList() {
 		const { pointsList, filteredCategory } = this.props
 		const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory[0]))
-		// console.log(pointsList.map(item => item.category_id.filter(category => category == 2)).filter(item => item.length != 0))
 
 		if (filteredCategory.length == 0) {
 			const data = pointsList.map(item => (
@@ -59,15 +58,14 @@ class PlacesList extends Component {
 				</div>
 			))
 			return data
-			
 		}
 	}
 
 	getFilterWindow = () => {
-		if (document.body.style.position == ('fixed')) { 
-			document.body.style.position = ('static')
+		if (document.body.style.position == 'fixed') {
+			document.body.style.position = 'static'
 		} else {
-			document.body.style.position = ('fixed')
+			document.body.style.position = 'fixed'
 		}
 		const { showFilter } = this.state
 		this.setState({ showFilter: !showFilter })
@@ -75,6 +73,7 @@ class PlacesList extends Component {
 
 	render() {
 		const { showFilter } = this.state
+		const { pointsList } = this.props
 		return (
 			<Fragment>
 				<div className="filter-bar">
@@ -84,7 +83,7 @@ class PlacesList extends Component {
 					</div>
 				</div>
 				<div>{showFilter && <Filter showFilter={this.state.showFilter} getFilterWindow={this.getFilterWindow} />}</div>
-				<div className="places-list">{this.getPointsList()}</div>
+				{pointsList !== undefined ? <div className="places-list">{this.getPointsList()}</div> : <div>Загрузка</div>}
 			</Fragment>
 		)
 	}
@@ -93,7 +92,7 @@ class PlacesList extends Component {
 const mapStateToProps = state => {
 	return {
 		pointsList: getContent(state).points,
-		filteredCategory: getFilteredCategory(state)
+		filteredCategory: getFilteredCategory(state),
 	}
 }
 

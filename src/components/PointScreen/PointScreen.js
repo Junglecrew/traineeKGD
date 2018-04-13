@@ -6,7 +6,7 @@ import { addAddressToStore } from 'reducers/content/actions'
 import { getContent, getPointsAddresses, getFilteredCategory } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/Rating'
-import Map from 'components/common/Map';
+import Map from 'components/common/Map'
 import './PointScreen.css'
 
 class PointScreen extends Component {
@@ -15,19 +15,22 @@ class PointScreen extends Component {
 
 		this.state = {
 			PointAddress: '',
-			
 		}
 	}
 	static propTypes = {
 		match: propTypes.object.isRequired,
-		pointsAddresses: propTypes.array
+		pointsAddresses: propTypes.array,
 	}
 
 	componentWillMount() {
-		console.log(this.props)
-		const { pointsList } = this.props
-		const Points = pointsList.filter(point => point.id === +this.props.match.params.index)
-		return this.setState({ Point: Points[0] })
+		const { pointsList, pointsAddresses } = this.props
+		const Point = pointsList.filter(point => point.id === +this.props.match.params.index)
+		console.log(Point)
+		console.log(pointsAddresses)
+		const { id } = Point[0]
+		pointsAddresses.filter(item => item.id === id)
+		console.log(pointsAddresses)
+		return this.setState({ Point: Point[0] })
 	}
 
 	componentDidMount() {
@@ -42,21 +45,28 @@ class PointScreen extends Component {
 					throw new Error(`Ответ сервера ${response.status}`)
 				}
 			})
-			// .then(data => this.setState({ PointAddress: data.results[0].formatted_address }))
-			.then(data => this.props.addAddressToStore( [{ id : id, PointAddress: data.results[0].formatted_address  }]))
+			// .then(data => {
+			// 	this.setState({ PointAddress: data.results[0].formatted_address })
+			// })
+			.then(data => this.props.addAddressToStore([{ id: id, PointAddress: data.results[0].formatted_address }]))
+
+		console.log(this.props.pointsAddresses)
 	}
 
 	getBody() {
 		const { category_id, photos, rate, name, description, description_2, cost_text, phone } = this.state.Point
 		const { PointAddress } = this.state
-		console.log(category_id)
-		console.log(photos)
+		const { pointsAddresses } = this.props
+		console.log(pointsAddresses)
 		return (
 			<div className="container">
 				<div className="point-photo">
-					<Link to='/'><div className="back-button"></div></Link></div>
-					<img className="point-photo__content" src={photos[0]} alt="Изображение точки" />
-				
+					<Link to="/">
+						<div className="back-button" />
+					</Link>
+				</div>
+				<img className="point-photo__content" src={photos[0]} alt="Изображение точки" />
+
 				<div className="main-content">
 					<div className="main-content__wrapper">
 						<div className="top-info">
@@ -91,14 +101,22 @@ class PointScreen extends Component {
 	}
 
 	getAddress() {
-		const { id } = this.state.Point
 		const { pointsAddresses } = this.props
-		pointsAddresses.filter(item => item.id === id)
-		return pointsAddresses[0].PointAddress
+		if (pointsAddresses.length === 0) {
+			return <div>Загрузка адреса</div>
+		} else {
+			return <div>{pointsAddresses[0].PointAddress}</div>
+		}
 	}
+ 	// getAddress() {
+	// 	const { id } = this.state.Point
+	// 	const { pointsAddresses } = this.props
+	// 	pointsAddresses.filter(item => item.id === id)
+	// 	console.log(pointsAddresses)
+	// 	return pointsAddresses[0].PointAddress
+	// }
 
 	render() {
-		this.getAddress()
 		return <div>{this.getBody()}</div>
 	}
 }
@@ -106,7 +124,7 @@ class PointScreen extends Component {
 const mapStateToProps = state => {
 	return {
 		pointsList: getContent(state).points,
-		pointsAddresses: getPointsAddresses(state)
+		pointsAddresses: getPointsAddresses(state),
 	}
 }
 

@@ -29,22 +29,22 @@ export const clearFilter = () => ({
 	type: types.CLEAR_FILTER,
 })
 
-export const addAddressToStore = (payload) => ({
+export const addAddressToStore = payload => ({
 	type: types.ADD_POINT_ADDRESS,
-	payload
+	payload,
 })
 
 export const contentThunk = () => (dispatch, getState) => {
 	if (getIsNeedUpdate(getState())) {
-		console.log('Получение данных с сервера')
-		store.dispatch(contentStart())
+		console.log('Получение данных с сервера(истечение времени)')
+    dispatch(contentStart())
 		fetch(`${API_URL}/${API_VERSION}/content`, {
 			headers: {
 				Authorization: `Token ${API_TOKEN}`,
 			},
 		})
 			.then(response => response.json())
-			.then(content => store.dispatch(contentSuccess(content)))
-			.catch(error => store.dispatch(contentError(error)))
+			.then(content => dispatch(contentSuccess(content)))
+			.catch(error => dispatch(contentError(error)))
 	}
 }
