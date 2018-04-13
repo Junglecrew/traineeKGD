@@ -37,7 +37,7 @@ export const addAddressToStore = payload => ({
 export const contentThunk = () => (dispatch, getState) => {
 	if (getIsNeedUpdate(getState())) {
 		console.log('Получение данных с сервера(истечение времени)')
-    dispatch(contentStart())
+		dispatch(contentStart())
 		fetch(`${API_URL}/${API_VERSION}/content`, {
 			headers: {
 				Authorization: `Token ${API_TOKEN}`,
@@ -47,4 +47,19 @@ export const contentThunk = () => (dispatch, getState) => {
 			.then(content => dispatch(contentSuccess(content)))
 			.catch(error => dispatch(contentError(error)))
 	}
+}
+
+export const getAddressGoogle = (latitude, longitude, id) => (dispatch, getState) => {
+	console.log('getting address from GOOGLE API DECODER')
+	const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
+	const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
+	fetch(api)
+		.then(response => {
+			if (response.status === 200) {
+				return response.json()
+			} else {
+				throw new Error(`Ответ сервера ${response.status}`)
+			}
+		})
+		.then(data => dispatch(addAddressToStore([{ id: id, PointAddress: data.results[0].formatted_address }])))
 }

@@ -45,11 +45,23 @@ export default (state = initialState, action) => {
 				...state,
 				filteredCategory: [],
 			}
+
 		case types.ADD_POINT_ADDRESS:
 			return {
 				...state,
-				pointsAddresses: action.payload,
+				pointsAddresses: [
+					...state.pointsAddresses,
+					{
+						id: action.payload[0].id,
+						PointAddress: action.payload[0].PointAddress,
+					},
+				],
 			}
+		// case types.ADD_POINT_ADDRESS:
+		// 	return {
+		// 		...state,
+		// 		pointsAddresses: action.payload,
+		// 	}
 
 		default:
 			return state

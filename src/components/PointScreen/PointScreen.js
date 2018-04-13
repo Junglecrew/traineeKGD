@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import propTypes from 'prop-types'
-import { addAddressToStore } from 'reducers/content/actions'
+import { addAddressToStore, getAddressGoogle } from 'reducers/content/actions'
 import { getContent, getPointsAddresses, getFilteredCategory } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/Rating'
@@ -10,16 +10,10 @@ import Map from 'components/common/Map'
 import './PointScreen.css'
 
 class PointScreen extends Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			PointAddress: '',
-		}
-	}
 	static propTypes = {
 		match: propTypes.object.isRequired,
 		pointsAddresses: propTypes.array,
+		getAddressGoogle: propTypes.func.isRequired,
 	}
 
 	componentWillMount() {
@@ -34,21 +28,24 @@ class PointScreen extends Component {
 	}
 
 	componentDidMount() {
+		const { getAddressGoogle } = this.props
 		const { latitude, longitude, id } = this.state.Point
-		const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
-		const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
-		fetch(api)
-			.then(response => {
-				if (response.status === 200) {
-					return response.json()
-				} else {
-					throw new Error(`Ответ сервера ${response.status}`)
-				}
-			})
-			// .then(data => {
-			// 	this.setState({ PointAddress: data.results[0].formatted_address })
-			// })
-			.then(data => this.props.addAddressToStore([{ id: id, PointAddress: data.results[0].formatted_address }]))
+		getAddressGoogle(latitude, longitude, id)
+		// const { latitude, longitude, id } = this.state.Point
+		// const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
+		// const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
+		// fetch(api)
+		// 	.then(response => {
+		// 		if (response.status === 200) {
+		// 			return response.json()
+		// 		} else {
+		// 			throw new Error(`Ответ сервера ${response.status}`)
+		// 		}
+		// 	})
+		// 	// .then(data => {
+		// 	// 	this.setState({ PointAddress: data.results[0].formatted_address })
+		// 	// })
+		// 	.then(data => this.props.addAddressToStore([{ id: id, PointAddress: data.results[0].formatted_address }]))
 
 		console.log(this.props.pointsAddresses)
 	}
@@ -101,11 +98,13 @@ class PointScreen extends Component {
 	}
 
 	getAddress() {
+		const { id } = this.state.Point
 		const { pointsAddresses } = this.props
-		if (pointsAddresses.length === 0) {
-			return <div>Загрузка адреса</div>
+		const pointDetails = pointsAddresses.find(item => item.id === id)
+		if (pointDetails === undefined) {
+			return <div>Загрузка адреса...</div>
 		} else {
-			return <div>{pointsAddresses[0].PointAddress}</div>
+			return <div>{pointDetails.PointAddress}</div>
 		}
 	}
  	// getAddress() {
@@ -128,4 +127,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { addAddressToStore })(PointScreen)
+export default connect(mapStateToProps, { addAddressToStore, getAddressGoogle })(PointScreen)
