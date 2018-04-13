@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import './PlacesList.css'
 import Point from 'components/Point'
-import Filter from '/components/Filter'
+import Filter from 'components/Filter'
 import { contentThunk } from 'reducers/content/actions'
-import { getContent } from 'reducers/content/selectors'
+import { getContent, getFilteredCategory } from 'reducers/content/selectors'
 
 
 class PlacesList extends Component {
@@ -15,48 +15,60 @@ class PlacesList extends Component {
 
 	static propTypes = {
 		pointsList: propTypes.array.isRequired,
+		filteredCategory: propTypes.array.isRequired,
 	}
 
 	componentDidMount() {
+		console.log(this.props)
 		const { contentThunk } = this.props
 		contentThunk()
-		window.addEventListener('scroll', this.getFilterWindow)
+		window.addEventListener('scroll', this.getFilterBar)
 	}
 
 	componentWillUnmount() {
-		window.removeEventListener('scroll', this.getFilterWindow)
+		window.removeEventListener('scroll', this.getFilterBar)
 	}
 
-	getFilterWindow() {
+	getFilterBar() {
 		const pointsBlock = document.getElementsByClassName('places-list')[0]
 		const filterBar = document.getElementsByClassName('filter-bar')[0]
 		const trigger = pointsBlock.getBoundingClientRect().top
-		if (trigger < 0) {
+		if (trigger < 200) {
 			filterBar.style.display = 'block'
 		} else {
 			filterBar.style.display = 'none'
 		}
 	}
 
-	// getFilterScreen() {
-	// 	const { categories } = this.props
-	// 	categories.map(category =>
-	// 	<li className="category"></li>
-	// }
-
 	getPointsList() {
-		const { pointsList } = this.props
-		if (pointsList != null) {
+		const { pointsList, filteredCategory } = this.props
+		const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory[0]))
+		// console.log(pointsList.map(item => item.category_id.filter(category => category == 2)).filter(item => item.length != 0))
+
+		if (filteredCategory.length == 0) {
 			const data = pointsList.map(item => (
 				<div className="places-list__item" key={item.id}>
 					<Point data={item} />
 				</div>
 			))
 			return data
+		} else {
+			const data = filteredPoints.map(item => (
+				<div className="places-list__item" key={item.id}>
+					<Point data={item} />
+				</div>
+			))
+			return data
+			
 		}
 	}
 
-	getFilterBar = () => {
+	getFilterWindow = () => {
+		if (document.body.style.position == ('fixed')) { 
+			document.body.style.position = ('static')
+		} else {
+			document.body.style.position = ('fixed')
+		}
 		const { showFilter } = this.state
 		this.setState({ showFilter: !showFilter })
 	}
@@ -68,10 +80,10 @@ class PlacesList extends Component {
 				<div className="filter-bar">
 					<div className="filter-bar__content">
 						<div className="filter-bar__logo" />
-						<div onClick={this.getFilterBar}>Фильтровать места</div>
+						<div onClick={this.getFilterWindow}>Фильтровать места</div>
 					</div>
 				</div>
-				<div>{showFilter && <Filter showFilter={this.state.showFilter} getFilterBar={this.getFilterBar} />}</div>
+				<div>{showFilter && <Filter showFilter={this.state.showFilter} getFilterWindow={this.getFilterWindow} />}</div>
 				<div className="places-list">{this.getPointsList()}</div>
 			</Fragment>
 		)
@@ -81,7 +93,7 @@ class PlacesList extends Component {
 const mapStateToProps = state => {
 	return {
 		pointsList: getContent(state).points,
-		// categories: getContent(state).categories,
+		filteredCategory: getFilteredCategory(state)
 	}
 }
 

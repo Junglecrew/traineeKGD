@@ -6,6 +6,7 @@ const initialState = {
 	payload: [],
 	lastUpdate: null,
 	filteredCategory: [],
+	pointsAddresses: [],
 }
 
 export default (state = initialState, action) => {
@@ -43,6 +44,12 @@ export default (state = initialState, action) => {
 				...state,
 				filteredCategory: [],
 			}
+		case types.ADD_POINT_ADDRESS:
+			return {
+				...state,
+				pointsAddresses: action.payload
+			}
+
 		default:
 			return state
 	}

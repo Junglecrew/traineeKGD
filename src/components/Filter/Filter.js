@@ -8,61 +8,52 @@ import './Filter.css'
 class Filter extends Component {
 	static propTypes = {
 		categories: propTypes.array.isRequired,
-		getFilterBar: propTypes.func.isRequired,
+		getFilterWindow: propTypes.func.isRequired,
 		filteredCategory: propTypes.array.isRequired,
+		setFilteredCategory: propTypes.func.isRequired,
+		clearFilter: propTypes.func.isRequired
 	}
 
-	handleFilterChange = (e) => {
-		console.log(e.target.checked)
-		if (e.target.ischecked == true) {
+
+	handleFilterChange(args, element) {
+		let elems = document.getElementsByClassName("category-item")
+		Array.from(elems).map(element => element.classList.remove("active"));
+		if (this.props.filteredCategory.includes(args)) {
 			this.props.clearFilter()
+			element.classList.remove("active")
 		} else {
-			this.props.setFilteredCategory([+e.target.value])
+			element.classList.add("active")
+			this.props.setFilteredCategory([args])
 		}
-
-		console.log(this.props.filteredCategory)
-
-		// if (e.target.checked === 'false') {
-		// 	console.log('меняем на тру')
-		// 	e.target.checked = 'true'
-		// } else {
-		// 	console.log('меняем на фалс')
-		// 	e.target.checked = 'false'
-		// }
-
 	}
 
 	render() {
-		const { categories } = this.props	
+		const { categories, filteredCategory } = this.props	
 		return (
 			<div className="filter-screen">
 				<div className="filter-screen__header">
-					<div className="close-btn" onClick={this.props.getFilterBar}>X</div>
+					<div className="close-btn" onClick={this.props.getFilterWindow}>X</div>
 					<div>Фильтровать места</div>
 				</div>
 				<div className="category-list">
-					<form>
-					{categories.map(item => (
-							<label className="category-list__item" key={item.id}>
-								<input
-									onChange={this.handleFilterChange}
-									type="radio"
-									value={item.id}
-									name="категории"
-									checked={this.props.filteredCategory[0] === item.id}
-								/>{' '}
-								{item.name}
-							</label>
-
-
-						// <div className="category-item">
-						// 	<div className="category-item__icon">
-						// 		<img src={item.icon} alt={item.name} />
-						// 	</div>
-						// 	<div> {item.name}</div>
-						// </div>
-					))}
-					</form>
+					{categories.map((item) => {
+						if (item.id === filteredCategory[0]) {
+							return	<div key={item.id} 
+													 className="category-item active" 
+													 onClick={(e) => this.handleFilterChange(item.id, e.currentTarget)}>
+												<div className="category-item__icon"><img src={item.icon} alt={item.name} /></div>
+												<div> {item.name}</div>
+										 </div>
+						} else {					
+							return	<div key={item.id} 
+													 className="category-item" 
+													 onClick={(e) => this.handleFilterChange(item.id, e.currentTarget)}>
+												<div className="category-item__icon"><img src={item.icon} alt={item.name} /></div>
+												<div> {item.name}</div>
+											</div>
+					}
+					})
+					}
 				</div>
 			</div>
 		)
@@ -72,7 +63,7 @@ class Filter extends Component {
 const mapStateToProps = state => {
 	return {
 		categories: getContent(state).categories,
-		filteredCategory: getFilteredCategory(state).filteredCategory,
+		filteredCategory: getFilteredCategory(state),
 	}
 }
 export default connect(mapStateToProps, { setFilteredCategory, clearFilter })(Filter)

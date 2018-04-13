@@ -13,7 +13,7 @@ h3 {
   color: #383d41; }
 
 .filter-screen {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   height: 100vh;
@@ -47,9 +47,14 @@ h3 {
 
 .category-item {
   display: flex;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  width: 90%; }
   .category-item__icon {
     width: 30px;
-    height: 30px; }
+    height: 30px;
+    margin-right: 15px; }
     .category-item__icon img {
       width: 100%; }
+
+.active {
+  color: #f33d41; }

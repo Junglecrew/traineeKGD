@@ -1,7 +1,7 @@
 @import 'src/index.scss';
 
 .filter-screen {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	width: 100%;
 	height: 100vh;
@@ -41,12 +41,17 @@
 .category-item {
 	display: flex;
 	margin-bottom: 20px;
+	width: 90%;
 	&__icon {
 		width: 30px;
 		height: 30px;
+		margin-right: 15px;
 		img {
 			width: 100%;
 		}
 	}
+}
 
+.active {
+	color: #f33d41;
 }

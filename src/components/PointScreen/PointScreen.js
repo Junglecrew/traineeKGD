@@ -1,34 +1,37 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import Categories from 'constants/categories.js'
-import Points from 'constants/points.js'
+import propTypes from 'prop-types'
+import { addAddressToStore } from 'reducers/content/actions'
+import { getContent, getPointsAddresses, getFilteredCategory } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/Rating'
 import Map from 'components/common/Map';
 import './PointScreen.css'
 
-export default class PointScreen extends Component {
+class PointScreen extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			Point: {},
 			PointAddress: '',
+			
 		}
 	}
 	static propTypes = {
-		match: PropTypes.object.isRequired,
+		match: propTypes.object.isRequired,
+		pointsAddresses: propTypes.array
 	}
 
 	componentWillMount() {
-		const FilteredPoints = Points.filter(point => point.id === +this.props.match.params.index)
-		return this.setState({ Point: FilteredPoints[0] })
+		console.log(this.props)
+		const { pointsList } = this.props
+		const Points = pointsList.filter(point => point.id === +this.props.match.params.index)
+		return this.setState({ Point: Points[0] })
 	}
 
 	componentDidMount() {
-		const { latitude, longitude } = this.state.Point
-		// const { PointAddress } = this.state.PointAddress
+		const { latitude, longitude, id } = this.state.Point
 		const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
 		const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
 		fetch(api)
@@ -39,7 +42,8 @@ export default class PointScreen extends Component {
 					throw new Error(`Ответ сервера ${response.status}`)
 				}
 			})
-			.then(data => this.setState({ PointAddress: data.results[0].formatted_address }))
+			// .then(data => this.setState({ PointAddress: data.results[0].formatted_address }))
+			.then(data => this.props.addAddressToStore( [{ id : id, PointAddress: data.results[0].formatted_address  }]))
 	}
 
 	getBody() {
@@ -75,7 +79,7 @@ export default class PointScreen extends Component {
 							<span className="point-phone__number">{phone}</span>
 						</div>
 						<div className="point-location">
-							<span className="point-location__text">{PointAddress}</span>
+							<span className="point-location__text">{this.getAddress()}</span>
 						</div>
 						<div id="map">
 							<Map point={this.state.Point} />
@@ -86,7 +90,24 @@ export default class PointScreen extends Component {
 		)
 	}
 
+	getAddress() {
+		const { id } = this.state.Point
+		const { pointsAddresses } = this.props
+		pointsAddresses.filter(item => item.id === id)
+		return pointsAddresses[0].PointAddress
+	}
+
 	render() {
+		this.getAddress()
 		return <div>{this.getBody()}</div>
 	}
 }
+
+const mapStateToProps = state => {
+	return {
+		pointsList: getContent(state).points,
+		pointsAddresses: getPointsAddresses(state)
+	}
+}
+
+export default connect(mapStateToProps, { addAddressToStore })(PointScreen)

@@ -29,6 +29,11 @@ export const clearFilter = () => ({
 	type: types.CLEAR_FILTER,
 })
 
+export const addAddressToStore = (payload) => ({
+	type: types.ADD_POINT_ADDRESS,
+	payload
+})
+
 export const contentThunk = () => (dispatch, getState) => {
 	if (getIsNeedUpdate(getState())) {
 		console.log('Получение данных с сервера')
