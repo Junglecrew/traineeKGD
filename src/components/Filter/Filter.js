@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import propTypes from 'prop-types'
 import { getContent, getFilteredCategory } from 'reducers/content/selectors'
@@ -8,32 +8,33 @@ import './Filter.css'
 class Filter extends Component {
 	static propTypes = {
 		categories: propTypes.array.isRequired,
-		getFilterWindow: propTypes.func.isRequired,
+		toggleFilterWindow: propTypes.func.isRequired,
 		filteredCategory: propTypes.number,
 		setFilteredCategory: propTypes.func.isRequired,
 		clearFilter: propTypes.func.isRequired,
 	}
 
 	handleFilterChange(args, element) {
+		const { toggleFilterWindow } = this.props
 		let elems = document.getElementsByClassName('category-item')
 		Array.from(elems).map(element => element.classList.remove('active'))
 		if (this.props.filteredCategory === args) {
 			this.props.clearFilter()
 			element.classList.remove('active')
+			setTimeout(toggleFilterWindow, 500)
 		} else {
 			element.classList.add('active')
 			this.props.setFilteredCategory(args)
+			setTimeout(toggleFilterWindow, 500)
 		}
 	}
 
 	render() {
-		const { categories, filteredCategory } = this.props
+		const { categories, filteredCategory, toggleFilterWindow } = this.props
 		return (
 			<div className="filter-screen">
 				<div className="filter-screen__header">
-					<div className="close-btn" onClick={this.props.getFilterWindow}>
-						X
-					</div>
+					<div className="close-btn" onClick={toggleFilterWindow} />
 					<div>Фильтровать места</div>
 				</div>
 				<div className="category-list">

@@ -36,7 +36,7 @@ class PlacesList extends Component {
 		if (trigger < 200) {
 			filterBar.style.top = '0'
 		} else {
-			filterBar.style.top = '-45px'
+			filterBar.style.top = '-70px'
 		}
 	}
 
@@ -61,7 +61,7 @@ class PlacesList extends Component {
 		}
 	}
 
-	getFilterWindow = () => {
+	toggleFilterWindow = () => {
 		if (document.body.style.position === 'fixed') {
 			document.body.style.position = 'static'
 		} else {
@@ -73,16 +73,18 @@ class PlacesList extends Component {
 
 	render() {
 		const { showFilter } = this.state
-		const { pointsList, ifFetching } = this.props
+		const { pointsList } = this.props
 		return (
 			<Fragment>
 				<div className="filter-bar">
 					<div className="filter-bar__content">
 						<div className="filter-bar__logo" />
-						<div onClick={this.getFilterWindow}>Фильтровать места</div>
+						<div onClick={this.toggleFilterWindow}>Фильтровать места</div>
 					</div>
 				</div>
-				<div>{showFilter && <Filter showFilter={this.state.showFilter} getFilterWindow={this.getFilterWindow} />}</div>
+				<div>
+					{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
+				</div>
 
 				{pointsList !== undefined ? <div className="places-list">{this.getPointsList()}</div> : <div>Загрузка</div>}
 			</Fragment>

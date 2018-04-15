@@ -12,19 +12,14 @@ import './PointScreen.css'
 class PointScreen extends Component {
 	static propTypes = {
 		match: propTypes.object.isRequired,
-		pointsAddresses: propTypes.array,
+		pointsAddresses: propTypes.object,
 		getAddressGoogle: propTypes.func.isRequired,
 		pointsList: propTypes.array,
 	}
 
 	componentWillMount() {
-		const { pointsList, pointsAddresses } = this.props
+		const { pointsList } = this.props
 		const Point = pointsList.filter(point => point.id === +this.props.match.params.index)
-		console.log(Point)
-		console.log(pointsAddresses)
-		const { id } = Point[0]
-		pointsAddresses.filter(item => item.id === id)
-		console.log(pointsAddresses)
 		return this.setState({ Point: Point[0] })
 	}
 
@@ -36,8 +31,6 @@ class PointScreen extends Component {
 
 	getBody() {
 		const { category_id, photos, rate, name, description, description_2, cost_text, phone } = this.state.Point
-		const { pointsAddresses } = this.props
-		console.log(pointsAddresses)
 		return (
 			<div className="container">
 				<div className="point-photo">
@@ -83,20 +76,12 @@ class PointScreen extends Component {
 	getAddress() {
 		const { id } = this.state.Point
 		const { pointsAddresses } = this.props
-		const pointDetails = pointsAddresses.find(item => item.id === id)
-		if (pointDetails === undefined) {
-			return <div>Загрузка адреса...</div>
+		if (pointsAddresses === null || !pointsAddresses[id]) {
+			return <div>Получение адреса...</div>
 		} else {
-			return <div>{pointDetails.PointAddress}</div>
+			return pointsAddresses[id].PointAddress
 		}
 	}
-	// getAddress() {
-	// 	const { id } = this.state.Point
-	// 	const { pointsAddresses } = this.props
-	// 	pointsAddresses.filter(item => item.id === id)
-	// 	console.log(pointsAddresses)
-	// 	return pointsAddresses[0].PointAddress
-	// }
 
 	render() {
 		return <div>{this.getBody()}</div>

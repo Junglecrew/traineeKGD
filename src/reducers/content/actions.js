@@ -50,7 +50,8 @@ export const contentThunk = () => (dispatch, getState) => {
 }
 
 export const getAddressGoogle = (latitude, longitude, id) => (dispatch, getState) => {
-	console.log('getting address from GOOGLE API DECODER')
+	// const state = { getState }
+	// if (doesAddressExist(state, id)) return
 	const key = 'AIzaSyBDyVqO6VkGcs1bqPgrZdY_Qvuaui7XmMo'
 	const api = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${key}`
 	fetch(api)

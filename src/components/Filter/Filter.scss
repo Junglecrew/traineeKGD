@@ -22,11 +22,14 @@
 }
 
 .close-btn {
+	background: url('../../assets/img/icClose/icClose@3x.png');
+	background-size: cover;
+	background-repeat: no-repeat;
 	position: absolute;
 	top: 2%;
 	left: 5%;
-	width: 30px;
-	height: 30px;
+	width: 24px;
+	height: 24px;
 }
 
 .category-list {
@@ -54,6 +57,17 @@
 
 .active {
 	color: #f33d41;
+	&:after {
+		content: "";
+		display: block;
+		background-image: url('../../assets/img/icCheck/icCheck@3x.png');
+		height: 24px;
+    width: 24px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-left: auto;
+	}
 }
 
 // Анимания окна с фильтром

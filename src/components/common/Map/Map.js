@@ -9,7 +9,6 @@ class Map extends Component {
 	}
 
 	render() {
-		console.log(this.props.point)
 		const center = { lat: this.props.point.latitude, lng: this.props.point.longitude }
 		const key = 'AIzaSyCC16ZdepSH2Jzu2yxG9_fFf_HjNBJPwaw'
 		return (
