@@ -3,6 +3,7 @@
 
 $point-title: 'Yeseva One', cursive;
 $main-content-text: 'Open Sans', sans-serif;
+$background-color: #f1f1f1;
 $h3-color: #383d41;
 $main-point-text: rgb(100, 104, 106);
 $red: #f33d41;
@@ -11,7 +12,7 @@ body {
   font-family: $main-content-text;
   margin: 0;
   padding: 0;
-  background-color: #eaeaea;
+  background-color: $background-color;
   color: $main-point-text;
 }
 

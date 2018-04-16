@@ -5,6 +5,7 @@ import propTypes from 'prop-types'
 import './PlacesList.css'
 import Point from 'components/Point'
 import Filter from 'components/Filter'
+import Preloader from 'components/common/Preloader'
 import { contentThunk } from 'reducers/content/actions'
 import { getContent, getFilteredCategory, getIsFetching } from 'reducers/content/selectors'
 
@@ -20,7 +21,7 @@ class PlacesList extends Component {
 	}
 
 	componentDidMount() {
-		const { contentThunk } = this.props
+		const { contentThunk, pointsList } = this.props
 		contentThunk()
 		window.addEventListener('scroll', this.getFilterBar)
 	}
@@ -32,7 +33,9 @@ class PlacesList extends Component {
 	getFilterBar() {
 		const pointsBlock = document.getElementsByClassName('places-list')[0]
 		const filterBar = document.getElementsByClassName('filter-bar')[0]
-		const trigger = pointsBlock.getBoundingClientRect().top
+		if (pointsBlock) {
+			var trigger = pointsBlock.getBoundingClientRect().top
+		}
 		if (trigger < 200) {
 			filterBar.style.top = '0'
 		} else {
@@ -86,7 +89,7 @@ class PlacesList extends Component {
 					{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
 				</div>
 
-				{pointsList !== undefined ? <div className="places-list">{this.getPointsList()}</div> : <div>Загрузка</div>}
+				{pointsList !== undefined ? <div className="places-list">{this.getPointsList()}</div> : <Preloader />}
 			</Fragment>
 		)
 	}

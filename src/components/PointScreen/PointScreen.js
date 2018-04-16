@@ -59,7 +59,9 @@ class PointScreen extends Component {
 							{cost_text}
 						</div>
 						<div className="point-phone">
-							<span className="point-phone__number">{phone}</span>
+							<a href={`tel:${phone}`} className="point-phone__number">
+								{phone}
+							</a>
 						</div>
 						<div className="point-location">
 							<span className="point-location__text">{this.getAddress()}</span>

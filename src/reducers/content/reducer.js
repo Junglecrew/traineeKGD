@@ -6,7 +6,7 @@ const initialState = {
 	payload: [],
 	lastUpdate: null,
 	filteredCategory: null,
-	pointsAddresses: null,
+	pointsAddresses: {},
 }
 
 export default (state = initialState, action) => {
