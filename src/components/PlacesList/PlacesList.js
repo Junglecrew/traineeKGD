@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { CSSTransitionGroup } from 'react-transition-group'
 import propTypes from 'prop-types'
-
-import './PlacesList.css'
 import Point from 'components/Point'
 import Filter from 'components/Filter'
 import Preloader from 'components/common/Preloader'
-import { contentThunk } from 'reducers/content/actions'
+import { contentThunk, getUserPosition } from 'reducers/content/actions'
 import { getContent, getFilteredCategory, getIsFetching } from 'reducers/content/selectors'
+import './PlacesList.css'
+import circleLogo from '/assets/img/icCircle@3x.png'
 
 class PlacesList extends Component {
 	state = {
@@ -21,8 +22,9 @@ class PlacesList extends Component {
 	}
 
 	componentDidMount() {
-		const { contentThunk, pointsList } = this.props
+		const { contentThunk, pointsList, getUserPosition } = this.props
 		contentThunk()
+		getUserPosition()
 		window.addEventListener('scroll', this.getFilterBar)
 	}
 
@@ -89,7 +91,16 @@ class PlacesList extends Component {
 					{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
 				</div>
 
-				{pointsList !== undefined ? <div className="places-list">{this.getPointsList()}</div> : <Preloader />}
+				{pointsList !== undefined ? (
+					<div className="places-list">
+						<div className="red-logo">
+							<img src={circleLogo} alt="Лого" />
+						</div>
+						{this.getPointsList()}
+					</div>
+				) : (
+					<Preloader />
+				)}
 			</Fragment>
 		)
 	}
@@ -103,4 +114,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { contentThunk })(PlacesList)
+export default connect(mapStateToProps, { contentThunk, getUserPosition })(PlacesList)

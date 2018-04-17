@@ -5,6 +5,7 @@ export const getFilteredCategory = state => state.content.filteredCategory
 export const getPointsAddresses = state => state.content.pointsAddresses
 export const getLastUpdate = state => state.content.lastUpdate
 export const doesAddressExist = (state, id) => (state.content.pointsAddresses[id] ? true : null)
+export const getUserLocation = state => state.content.currentUserPosition
 
 export const getIsNeedUpdate = state =>
 	getLastUpdate(state) === null ||

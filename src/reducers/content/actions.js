@@ -34,6 +34,11 @@ export const addAddressToStore = payload => ({
 	payload,
 })
 
+export const setCurrectUserPosition = payload => ({
+	type: types.SET_USER_POSITION,
+	payload,
+})
+
 export const contentThunk = () => (dispatch, getState) => {
 	if (getIsNeedUpdate(getState())) {
 		console.log('Получение данных с сервера(истечение времени)')
@@ -64,4 +69,23 @@ export const getAddressGoogle = (latitude, longitude, id) => (dispatch, getState
 			}
 		})
 		.then(data => dispatch(addAddressToStore([{ id: id, PointAddress: data.results[0].formatted_address }])))
+}
+
+export const getUserPosition = () => (dispatch, getState) => {
+	navigator.geolocation.getCurrentPosition(
+		pos => {
+			const Pointlat = pos.coords.latitude
+			const Pointlng = pos.coords.longitude
+			console.log('Вычисление координаты пользователя')
+			dispatch(setCurrectUserPosition({ lat: Pointlat, lng: Pointlng }))
+		},
+		err => {
+			console.warn(`ERROR(${err.code}): ${err.message}`)
+		},
+		{
+			enableHighAccuracy: true,
+			timeout: 50000,
+			maximumAge: 0,
+		},
+	)
 }

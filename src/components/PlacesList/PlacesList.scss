@@ -1,6 +1,7 @@
 @import 'src/index.scss';
 
 .places-list {
+	position: relative;
 	border-radius: 5px;
 	background-color: #fff;
 	box-shadow: 0px 0px 25px 0px #d7d5d7;
@@ -43,3 +44,37 @@
 	}
 }
 
+.red-logo {
+	position: absolute;
+	height: 56px;
+	width: 100%;
+	left: 0px;
+	top: -28px;
+	text-align: center;
+	img {
+		display: inline-block;
+		height: 56px;
+		width: 56px;
+	}
+}
+
+.pointslist-enter {
+  opacity: 0.01; }
+
+.pointslist-enter.pointslist-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in; }
+
+.pointslist-appear {
+  opacity: 0.01; }
+
+.pointslist-appear.pointslist-appear-active {
+  opacity: 1;
+  transition: opacity 1000ms ease-in; }
+
+.pointslist-leave {
+  opacity: 1; }
+
+.pointslist-leave.pointslist-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in; }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import GoogleMapReact from 'google-map-react'
+import propTypes from 'prop-types'
 import locationLogo from '/assets/svgs/icLocation.svg'
 
 const Marker = ({ text }) => (
@@ -12,8 +13,6 @@ const Marker = ({ text }) => (
 			top: -24,
 			right: -5,
 			background: `url(${locationLogo})`,
-			// top: -20,
-			// left: -30,
 		}}
 	>
 		{text}
@@ -25,12 +24,33 @@ class Map extends Component {
 		zoom: 16,
 	}
 
+	static propTypes = {
+		point: propTypes.object.isRequired,
+		zoom: propTypes.number,
+	}
+
+	createMapOptions = maps => {
+		return {
+			panControl: false,
+			mapTypeControl: false,
+			scrollwheel: false,
+			draggable: false,
+			zoomControl: false,
+			fullscreenControl: false,
+		}
+	}
+
 	render() {
 		const center = { lat: this.props.point.latitude, lng: this.props.point.longitude }
 		const key = 'AIzaSyCC16ZdepSH2Jzu2yxG9_fFf_HjNBJPwaw'
 		return (
 			<div style={{ height: '300px', width: '110%', margin: '0 -15px' }}>
-				<GoogleMapReact bootstrapURLKeys={{ key: key }} defaultCenter={center} defaultZoom={this.props.zoom}>
+				<GoogleMapReact
+					bootstrapURLKeys={{ key: key }}
+					defaultCenter={center}
+					defaultZoom={this.props.zoom}
+					options={this.createMapOptions}
+				>
 					<Marker lat={this.props.point.latitude} lng={this.props.point.longitude} />
 				</GoogleMapReact>
 			</div>

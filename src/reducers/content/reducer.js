@@ -7,6 +7,7 @@ const initialState = {
 	lastUpdate: null,
 	filteredCategory: null,
 	pointsAddresses: {},
+	currentUserPosition: {},
 }
 
 export default (state = initialState, action) => {
@@ -54,6 +55,11 @@ export default (state = initialState, action) => {
 						PointAddress: action.payload[0].PointAddress,
 					},
 				},
+			}
+		case types.SET_USER_POSITION:
+			return {
+				...state,
+				currentUserPosition: action.payload,
 			}
 		// case types.ADD_POINT_ADDRESS:
 		// 	return {

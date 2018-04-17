@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { CSSTransitionGroup } from 'react-transition-group'
 import propTypes from 'prop-types'
-import { addAddressToStore, getAddressGoogle } from 'reducers/content/actions'
+import { addAddressToStore, getAddressGoogle, contentThunk } from 'reducers/content/actions'
 import { getContent, getPointsAddresses } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/Rating'
@@ -14,6 +15,7 @@ class PointScreen extends Component {
 		match: propTypes.object.isRequired,
 		pointsAddresses: propTypes.object,
 		getAddressGoogle: propTypes.func.isRequired,
+		contentThunk: propTypes.func,
 		pointsList: propTypes.array,
 	}
 
@@ -24,6 +26,7 @@ class PointScreen extends Component {
 	}
 
 	componentDidMount() {
+		this.props.contentThunk()
 		const { getAddressGoogle } = this.props
 		const { latitude, longitude, id } = this.state.Point
 		getAddressGoogle(latitude, longitude, id)
@@ -97,4 +100,4 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { addAddressToStore, getAddressGoogle })(PointScreen)
+export default connect(mapStateToProps, { addAddressToStore, getAddressGoogle, contentThunk })(PointScreen)
