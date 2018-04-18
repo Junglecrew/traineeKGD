@@ -22,7 +22,7 @@
 }
 
 .close-btn {
-	background: url('../../assets/img/icClose/icClose@3x.png');
+	background: url('../../../../assets/img/icClose/icClose@3x.png');
 	background-size: cover;
 	background-repeat: no-repeat;
 	position: absolute;
@@ -60,7 +60,7 @@
 	&:after {
 		content: "";
 		display: block;
-		background-image: url('../../assets/img/icCheck/icCheck@3x.png');
+		background-image: url('../../../../assets/img/icCheck/icCheck@3x.png');
 		height: 24px;
     width: 24px;
     background-position: center;

@@ -2,8 +2,8 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import propTypes from 'prop-types'
-import Point from 'components/Point'
-import Filter from 'components/Filter'
+import Point from 'components/HomeScreen/PlacesList/Point'
+import Filter from 'components/HomeScreen/PlacesList//Filter'
 import Preloader from 'components/common/Preloader'
 import { contentThunk, getUserPosition } from 'reducers/content/actions'
 import { getContent, getFilteredCategory, getIsFetching } from 'reducers/content/selectors'
@@ -120,4 +120,5 @@ const mapStateToProps = state => {
 	}
 }
 
+ 
 export default connect(mapStateToProps, { contentThunk, getUserPosition })(PlacesList)

@@ -19,8 +19,6 @@ class Geo extends Component {
 
 	componentDidMount() {
 		const { userLocation, latitude, longitude } = this.props
-		// const pointLocation = new google.maps.LatLng(this.props.latitude, this.props.longitude)
-		// const userLoc = new google.maps.LatLng(userLocation)
 		const calculateDistance = (lat1, lon1, lat2, lon2) => {
 			const radlat1 = Math.PI * lat1 / 180
 			const radlat2 = Math.PI * lat2 / 180

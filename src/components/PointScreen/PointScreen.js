@@ -6,9 +6,9 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { addAddressToStore, getAddressGoogle, contentThunk } from 'reducers/content/actions'
 import { getContent, getPointsAddresses } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
-import Rating from 'components/Rating'
+import Rating from 'components/PointScreen/Rating'
 import Map from 'components/common/Map'
-import GalleryModal from 'components/GalleryModal'
+import GalleryModal from 'components/PointScreen/GalleryModal'
 import './PointScreen.css'
 
 class PointScreen extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PointHeader from 'components/common/PointHeader'
-import PointContent from 'components/PointContent'
+import PointContent from 'components/HomeScreen/PlacesList/Point/PointContent'
 import PropTypes from 'prop-types'
 import './Point.css'
 
