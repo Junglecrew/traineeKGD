@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { CSSTransitionGroup } from 'react-transition-group'
 import propTypes from 'prop-types'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { addAddressToStore, getAddressGoogle, contentThunk } from 'reducers/content/actions'
 import { getContent, getPointsAddresses } from 'reducers/content/selectors'
 import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/Rating'
 import Map from 'components/common/Map'
+import GalleryModal from 'components/GalleryModal'
 import './PointScreen.css'
 
 class PointScreen extends Component {
@@ -17,6 +18,10 @@ class PointScreen extends Component {
 		getAddressGoogle: propTypes.func.isRequired,
 		contentThunk: propTypes.func,
 		pointsList: propTypes.array,
+	}
+
+	state = {
+		showGallery: false,
 	}
 
 	componentWillMount() {
@@ -32,16 +37,24 @@ class PointScreen extends Component {
 		getAddressGoogle(latitude, longitude, id)
 	}
 
+	toggleGalleryOpen = () => {
+		this.setState({ showGallery: !this.state.showGallery })
+	}
+
 	getBody() {
 		const { category_id, photos, rate, name, description, description_2, cost_text, phone } = this.state.Point
 		return (
 			<div className="container">
-				<div className="point-photo">
+				<div
+					className="point-photo"
+					style={{ backgroundImage: `url(${photos[0]})`, height: `300px`, backgroundSize: 'cover' }}
+					onClick={this.toggleGalleryOpen}
+				>
 					<Link to="/">
 						<div className="back-button" />
 					</Link>
 				</div>
-				<img className="point-photo__content" src={photos[0]} alt="Изображение точки" />
+				{/* <img className="point-photo__content" src={photos[0]} alt="Изображение точки" /> */}
 
 				<div className="main-content">
 					<div className="main-content__wrapper">
@@ -89,7 +102,19 @@ class PointScreen extends Component {
 	}
 
 	render() {
-		return <div>{this.getBody()}</div>
+		const { photos } = this.state.Point
+		return (
+			<div>
+				<div key={this.state.Point.id}>{this.getBody()}</div>
+				<ReactCSSTransitionGroup
+					transitionName="gallery-modal"
+					transitionEnterTimeout={200}
+					transitionLeaveTimeout={300}
+				>
+					{this.state.showGallery && <GalleryModal photos={photos} onClose={this.toggleGalleryOpen} />}
+				</ReactCSSTransitionGroup>
+			</div>
+		)
 	}
 }
 

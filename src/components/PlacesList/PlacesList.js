@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { CSSTransitionGroup } from 'react-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import propTypes from 'prop-types'
 import Point from 'components/Point'
 import Filter from 'components/Filter'
@@ -22,7 +22,7 @@ class PlacesList extends Component {
 	}
 
 	componentDidMount() {
-		const { contentThunk, pointsList, getUserPosition } = this.props
+		const { contentThunk, getUserPosition } = this.props
 		contentThunk()
 		getUserPosition()
 		window.addEventListener('scroll', this.getFilterBar)
@@ -88,7 +88,13 @@ class PlacesList extends Component {
 					</div>
 				</div>
 				<div>
-					{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
+					<ReactCSSTransitionGroup
+						transitionName="filter-window"
+						transitionEnterTimeout={300}
+						transitionLeaveTimeout={300}
+					>
+						{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
+					</ReactCSSTransitionGroup>
 				</div>
 
 				{pointsList !== undefined ? (

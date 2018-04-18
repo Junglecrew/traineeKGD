@@ -117,3 +117,20 @@
   width: 100%;
   height: 50px;
 }
+.gallery-modal-enter {
+  opacity: 0.01;
+}
+
+.gallery-modal-enter.gallery-modal-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in-out;
+}
+
+.gallery-modal-leave {
+  opacity: 1;
+}
+
+.gallery-modal-leave.gallery-modal-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in-out;
+}

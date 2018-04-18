@@ -14,19 +14,22 @@
 		color: black;
 	}
 	&__discount {
-		background-color: red;
-		color: white;
-		height: 25px;
-		line-height: 25px;
-		min-width: 50px;
-		text-align: right;
-		position: absolute;
-		top: 0;
-		right: 0;
+    background-color: red;
+    color: white;
+    height: 28px;
+    line-height: 28px;
+    min-width: 64px;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-right: 5px;
+    font-weight: 600;
+    font-size: 18px;
 		&:before {
 			content: '';
 			position: absolute;
-			border: 13px solid transparent;
+			border: 15px solid transparent;
 			border-left: 10px solid white;
 			left: -1px;
 		}
