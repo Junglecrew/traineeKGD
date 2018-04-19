@@ -3,13 +3,15 @@ import Filter from './Filter'
 
 import { getContent } from 'reducers/content/selectors'
 import { getFilteredCategory } from 'reducers/filter/selectors'
-import { setFilteredCategory, clearFilter } from 'reducers/filter/actions'
+import { handleFilterChange, toggleFilterWindow } from 'reducers/filter/actions'
+import { showFilter } from 'reducers/filter/selectors'
 
 const mapStateToProps = state => {
 	return {
 		categories: getContent(state).categories,
 		filteredCategory: getFilteredCategory(state),
+		showFilter: showFilter(state),
 	}
 }
 
-export default connect(mapStateToProps, { setFilteredCategory, clearFilter })(Filter)
+export default connect(mapStateToProps, { handleFilterChange, toggleFilterWindow })(Filter)

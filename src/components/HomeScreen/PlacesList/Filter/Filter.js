@@ -5,20 +5,13 @@ import './Filter.css'
 class Filter extends Component {
 	static propTypes = {
 		categories: propTypes.array.isRequired,
-		toggleFilterWindow: propTypes.func.isRequired,
 		filteredCategory: propTypes.number,
-		setFilteredCategory: propTypes.func.isRequired,
-		clearFilter: propTypes.func.isRequired,
-	}
-
-	handleFilterChange = id => {
-		const { setFilteredCategory, toggleFilterWindow } = this.props
-		setFilteredCategory(id)
-		toggleFilterWindow()
+		handleFilterChange: propTypes.func,
+		toggleFilterWindow: propTypes.func,
 	}
 
 	render() {
-		const { categories, filteredCategory, toggleFilterWindow } = this.props
+		const { categories, filteredCategory, toggleFilterWindow, handleFilterChange } = this.props
 		return (
 			<div className="filter-screen">
 				<div className="filter-screen__header">
@@ -31,7 +24,7 @@ class Filter extends Component {
 							<div
 								key={item.id}
 								className={`category-item ${filteredCategory === item.id ? 'active' : ''} `}
-								onClick={() => this.handleFilterChange(item.id)}
+								onClick={() => handleFilterChange(item.id)}
 							>
 								<div className="category-item__icon">
 									<img src={item.icon} alt={item.name} />

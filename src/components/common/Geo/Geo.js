@@ -26,21 +26,19 @@ class Geo extends Component {
 
 	getDistance() {
 		const { userLocation, latitude, longitude } = this.props
-		const range =
-			userLocation === null ? (
-				<div>Загружаем</div>
-			) : (
-				<div>{this.calculateDistance(userLocation.lat, userLocation.lng, latitude, longitude)}</div>
-			)
+		const range = <div>{this.calculateDistance(userLocation.lat, userLocation.lng, latitude, longitude)}</div>
 		return range
 	}
 
 	render() {
-		return (
+		const { userLocation } = this.props
+		return userLocation !== null ? (
 			<div className="geo">
 				<img className="geo__logo" src={locationLogo} alt="Лого локации" />
 				<div className="geo__range">{this.getDistance()}</div>
 			</div>
+		) : (
+			<div />
 		)
 	}
 }

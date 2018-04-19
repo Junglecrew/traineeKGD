@@ -1,23 +1,20 @@
 import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import propTypes from 'prop-types'
 import Point from 'components/HomeScreen/PlacesList/Point'
-import Filter from 'components/HomeScreen/PlacesList//Filter'
+import Filter from 'components/HomeScreen/PlacesList/Filter'
 import Preloader from 'components/common/Preloader'
 import './PlacesList.css'
 import circleLogo from '/assets/img/icCircle@3x.png'
 
 class PlacesList extends Component {
-	state = {
-		showFilter: false,
-	}
-
 	static propTypes = {
 		pointsList: propTypes.array,
 		filteredCategory: propTypes.number,
+		showFilter: propTypes.bool,
 		contentThunk: propTypes.func.isRequired,
 		getUserPosition: propTypes.func,
+		toggleFilterWindow: propTypes.func,
 	}
 
 	componentDidMount() {
@@ -47,43 +44,23 @@ class PlacesList extends Component {
 	getPointsList() {
 		const { pointsList, filteredCategory } = this.props
 		const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory))
-
-		if (filteredCategory === null) {
-			const data = pointsList.map(item => (
-				<div className="places-list__item" key={item.id}>
-					<Point data={item} />
-				</div>
-			))
-			return data
-		} else {
-			const data = filteredPoints.map(item => (
-				<div className="places-list__item" key={item.id}>
-					<Point data={item} />
-				</div>
-			))
-			return data
-		}
-	}
-
-	toggleFilterWindow = () => {
-		if (document.body.style.position === 'fixed') {
-			document.body.style.position = 'static'
-		} else {
-			document.body.style.position = 'fixed'
-		}
-		const { showFilter } = this.state
-		this.setState({ showFilter: !showFilter })
+		const context = filteredCategory === null ? pointsList : filteredPoints
+		const data = context.map(item => (
+			<div className="places-list__item" key={item.id}>
+				<Point data={item} />
+			</div>
+		))
+		return data
 	}
 
 	render() {
-		const { showFilter } = this.state
-		const { pointsList } = this.props
+		const { pointsList, showFilter, toggleFilterWindow } = this.props
 		return (
 			<Fragment>
 				<div className="filter-bar">
 					<div className="filter-bar__content">
 						<div className="filter-bar__logo" />
-						<div onClick={this.toggleFilterWindow}>Фильтровать места</div>
+						<div onClick={() => toggleFilterWindow()}>Фильтровать места</div>
 					</div>
 				</div>
 				<div>
@@ -92,7 +69,7 @@ class PlacesList extends Component {
 						transitionEnterTimeout={400}
 						transitionLeaveTimeout={400}
 					>
-						{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
+						{showFilter && <Filter />}
 					</ReactCSSTransitionGroup>
 				</div>
 
@@ -111,5 +88,4 @@ class PlacesList extends Component {
 	}
 }
 
- 
 export default PlacesList

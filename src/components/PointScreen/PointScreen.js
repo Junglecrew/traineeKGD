@@ -6,7 +6,10 @@ import PointHeader from 'components/common/PointHeader'
 import Rating from 'components/PointScreen/Rating'
 import Map from 'components/common/Map'
 import GalleryModal from 'components/PointScreen/GalleryModal'
+import Favourite from 'components/HomeScreen/PlacesList/Favourite'
+import Preloader from 'components/common/Preloader'
 import './PointScreen.css'
+
 
 class PointScreen extends Component {
 	static propTypes = {
@@ -24,6 +27,7 @@ class PointScreen extends Component {
 	componentWillMount() {
 		const { pointsList } = this.props
 		const Point = pointsList.filter(point => point.id === +this.props.match.params.index)
+		window.scrollTo(0, 0)
 		return this.setState({ Point: Point[0] })
 	}
 
@@ -39,19 +43,18 @@ class PointScreen extends Component {
 	}
 
 	getBody() {
-		const { category_id, photos, rate, name, description, description_2, cost_text, phone } = this.state.Point
+		const { id, category_id, photos, rate, name, description, description_2, cost_text, phone } = this.state.Point
 		return (
 			<div className="container">
 				<div
 					className="point-photo"
-					style={{ backgroundImage: `url(${photos[0]})`, height: `300px`, backgroundSize: 'cover' }}
+					style={{ backgroundImage: `url(${photos[0]})`, height: `150px`, backgroundSize: 'cover' }}
 					onClick={this.toggleGalleryOpen}
 				>
 					<Link to="/">
 						<div className="back-button" />
 					</Link>
 				</div>
-				{/* <img className="point-photo__content" src={photos[0]} alt="Изображение точки" /> */}
 
 				<div className="main-content">
 					<div className="main-content__wrapper">
@@ -60,6 +63,7 @@ class PointScreen extends Component {
 								<PointHeader id={category_id} />
 							</div>
 							<Rating rate={rate} />
+							<Favourite id={id} />
 						</div>
 						<div className="point-title">{name}</div>
 						<div className="point-description">{description}</div>
