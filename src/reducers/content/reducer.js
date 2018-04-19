@@ -7,7 +7,7 @@ const initialState = {
 	lastUpdate: null,
 	filteredCategory: null,
 	pointsAddresses: {},
-	currentUserPosition: {},
+	currentUserPosition: null,
 }
 
 export default (state = initialState, action) => {
@@ -35,43 +35,6 @@ export default (state = initialState, action) => {
 				payload: [],
 				lastUpdate: null,
 			}
-		case types.FILTER_CATEGORY:
-			return {
-				...state,
-				filteredCategory: action.payload,
-			}
-		case types.CLEAR_FILTER:
-			return {
-				...state,
-				filteredCategory: null,
-			}
-
-		case types.ADD_POINT_ADDRESS:
-			return {
-				...state,
-				pointsAddresses: {
-					...state.pointsAddresses,
-					[action.payload[0].id]: {
-						PointAddress: action.payload[0].PointAddress,
-					},
-				},
-			}
-		case types.SET_USER_POSITION:
-			return {
-				...state,
-				currentUserPosition: action.payload,
-			}
-		// case types.ADD_POINT_ADDRESS:
-		// 	return {
-		// 		...state,
-		// 		pointsAddresses: [
-		// 			...state.pointsAddresses,
-		// 			{
-		// 				id: action.payload[0].id,
-		// 				PointAddress: action.payload[0].PointAddress,
-		// 			},
-		//     ],
-		// 	}
 		default:
 			return state
 	}

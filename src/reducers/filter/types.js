@@ -1,0 +1,2 @@
+export const FILTER_CATEGORY = 'FILTER_CATEGORY'
+export const CLEAR_FILTER = 'CLEAR_FILTER'

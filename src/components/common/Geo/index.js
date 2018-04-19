@@ -1,3 +1,3 @@
-import Geo from './Geo'
+import Geo from './Geo.connect'
 
 export default Geo

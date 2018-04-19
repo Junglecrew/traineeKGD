@@ -5,8 +5,6 @@ import propTypes from 'prop-types'
 import Point from 'components/HomeScreen/PlacesList/Point'
 import Filter from 'components/HomeScreen/PlacesList//Filter'
 import Preloader from 'components/common/Preloader'
-import { contentThunk, getUserPosition } from 'reducers/content/actions'
-import { getContent, getFilteredCategory, getIsFetching } from 'reducers/content/selectors'
 import './PlacesList.css'
 import circleLogo from '/assets/img/icCircle@3x.png'
 
@@ -19,6 +17,7 @@ class PlacesList extends Component {
 		pointsList: propTypes.array,
 		filteredCategory: propTypes.number,
 		contentThunk: propTypes.func.isRequired,
+		getUserPosition: propTypes.func,
 	}
 
 	componentDidMount() {
@@ -90,8 +89,8 @@ class PlacesList extends Component {
 				<div>
 					<ReactCSSTransitionGroup
 						transitionName="filter-window"
-						transitionEnterTimeout={300}
-						transitionLeaveTimeout={300}
+						transitionEnterTimeout={400}
+						transitionLeaveTimeout={400}
 					>
 						{showFilter && <Filter showFilter={this.state.showFilter} toggleFilterWindow={this.toggleFilterWindow} />}
 					</ReactCSSTransitionGroup>
@@ -112,13 +111,5 @@ class PlacesList extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		pointsList: getContent(state).points,
-		filteredCategory: getFilteredCategory(state),
-		ifFetching: getIsFetching(state),
-	}
-}
-
  
-export default connect(mapStateToProps, { contentThunk, getUserPosition })(PlacesList)
+export default PlacesList

@@ -1,3 +1,3 @@
-import PointScreen from './PointScreen'
+import PointScreen from './PointScreen.connect'
 
 export default PointScreen

@@ -13,4 +13,5 @@
   z-index: 1000; }
 
 .gallery_image {
-  width: 100%; }
+  width: 100%;
+  vertical-align: middle; }

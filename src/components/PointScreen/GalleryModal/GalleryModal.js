@@ -27,6 +27,7 @@ class GalleryModal extends Component {
 			slidesToShow: 1,
 			slidesToScroll: 1,
 			adaptiveHeight: false,
+			lazyLoad: true,
 		}
 		const { photos } = this.props
 		const data = photos.map(photo => (

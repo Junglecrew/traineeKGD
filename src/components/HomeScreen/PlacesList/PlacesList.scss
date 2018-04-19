@@ -7,11 +7,7 @@
 	box-shadow: 0px 0px 25px 0px #d7d5d7;
 	&__item {
 		padding-top: 10px;
-		> div:first-child {
-			padding-top: 35px;
-		}
 	}
-
 }
 
 .filter-bar {
@@ -45,8 +41,8 @@
 }
 
 .red-logo {
-	position: absolute;
-	height: 56px;
+	position: relative;
+	height: 38px;
 	width: 100%;
 	left: 0px;
 	top: -28px;
@@ -59,19 +55,23 @@
 }
 
 .filter-window-enter {
-  opacity: 0.01;
+	opacity: 0.01;
+	transform: translateY(-100%)
 }
 
 .filter-window-enter.filter-window-enter-active {
   opacity: 1;
-  transition: opacity 300ms linear;
+	transition: transform 400ms linear;
+	transform: translateY(0)
 }
 
 .filter-window-leave {
-  opacity: 1;
+	opacity: 1;
+	transform: translateY(0)
 }
 
 .filter-window-leave.filter-window-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms linear;
+  // opacity: 0.01;
+	transition: transform 400ms linear;
+	transform: translateY(-100%)
 }

@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import propTypes from 'prop-types'
-import { getContent, getFilteredCategory } from 'reducers/content/selectors'
-import { setFilteredCategory, clearFilter } from 'reducers/content/actions'
 import './Filter.css'
 
 class Filter extends Component {
@@ -14,19 +11,10 @@ class Filter extends Component {
 		clearFilter: propTypes.func.isRequired,
 	}
 
-	handleFilterChange(args, element) {
-		const { toggleFilterWindow } = this.props
-		let elems = document.getElementsByClassName('category-item')
-		Array.from(elems).map(element => element.classList.remove('active'))
-		if (this.props.filteredCategory === args) {
-			this.props.clearFilter()
-			element.classList.remove('active')
-			setTimeout(toggleFilterWindow, 500)
-		} else {
-			element.classList.add('active')
-			this.props.setFilteredCategory(args)
-			setTimeout(toggleFilterWindow, 500)
-		}
+	handleFilterChange = id => {
+		const { setFilteredCategory, toggleFilterWindow } = this.props
+		setFilteredCategory(id)
+		toggleFilterWindow()
 	}
 
 	render() {
@@ -39,33 +27,18 @@ class Filter extends Component {
 				</div>
 				<div className="category-list">
 					{categories.map(item => {
-						if (item.id === filteredCategory) {
-							return (
-								<div
-									key={item.id}
-									className="category-item active"
-									onClick={e => this.handleFilterChange(item.id, e.currentTarget)}
-								>
-									<div className="category-item__icon">
-										<img src={item.icon} alt={item.name} />
-									</div>
-									<div> {item.name}</div>
+						return (
+							<div
+								key={item.id}
+								className={`category-item ${filteredCategory === item.id ? 'active' : ''} `}
+								onClick={() => this.handleFilterChange(item.id)}
+							>
+								<div className="category-item__icon">
+									<img src={item.icon} alt={item.name} />
 								</div>
-							)
-						} else {
-							return (
-								<div
-									key={item.id}
-									className="category-item"
-									onClick={e => this.handleFilterChange(item.id, e.currentTarget)}
-								>
-									<div className="category-item__icon">
-										<img src={item.icon} alt={item.name} />
-									</div>
-									<div> {item.name}</div>
-								</div>
-							)
-						}
+								<div> {item.name}</div>
+							</div>
+						)
 					})}
 				</div>
 			</div>
@@ -73,10 +46,4 @@ class Filter extends Component {
 	}
 }
 
-const mapStateToProps = state => {
-	return {
-		categories: getContent(state).categories,
-		filteredCategory: getFilteredCategory(state),
-	}
-}
-export default connect(mapStateToProps, { setFilteredCategory, clearFilter })(Filter)
+export default Filter

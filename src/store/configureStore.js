@@ -10,7 +10,7 @@ const sagaMiddleware = createSagaMiddleWare()
 const middlewares = [sagaMiddleware, thunk]
 
 const persistConfig = {
-	key: 'redux.store.kode.trainee',
+	key: 'redux.store.kode.DmitriPetrov',
 	storage,
 }
 const persistedReducer = persistReducer(persistConfig, rootReducer)
