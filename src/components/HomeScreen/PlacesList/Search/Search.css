@@ -1,7 +1,8 @@
 .top-bar__search {
   display: flex;
   flex-direction: row-reverse;
-  margin-bottom: 10px; }
+  width: 90%;
+  margin: 0 auto 10px; }
   .top-bar__search span div {
     display: flex;
     justify-content: space-between; }

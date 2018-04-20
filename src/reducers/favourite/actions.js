@@ -11,7 +11,15 @@ export const removePointFromFavourite = payload => ({
 	payload,
 })
 
+export const toggleFavouritesShow = () => ({
+	type: types.FAVOURITE_TOGGLE_SHOW,
+})
+
 export const handleClickFavourites = id => (dispatch, getState) => {
 	const state = getState()
 	isFavourite(state, id) ? dispatch(removePointFromFavourite(id)) : dispatch(addPointToFavourite(id))
+}
+
+export const handleToggleFavouritesShow = () => (dispatch, getState) => {
+	dispatch(toggleFavouritesShow())
 }

@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import propTypes from 'prop-types'
 import Point from 'components/HomeScreen/PlacesList/Point'

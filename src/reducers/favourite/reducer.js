@@ -2,6 +2,7 @@ import * as types from './types'
 
 const initialState = {
 	favourites: [],
+	showFavourite: false,
 }
 
 export default (state = initialState, action) => {
@@ -15,6 +16,11 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				favourites: state.favourites.filter(item => action.payload !== item),
+			}
+		case types.FAVOURITE_TOGGLE_SHOW:
+			return {
+				...state,
+				showFavourite: !state.showFavourite,
 			}
 		default:
 			return state

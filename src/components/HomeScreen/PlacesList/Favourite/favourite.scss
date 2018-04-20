@@ -1,0 +1,29 @@
+@import 'src/index.scss';
+
+.btn-favourite {
+	border-radius: 2px;
+	outline: none;
+	padding: 5px;
+	background-color: #d9d9d9;
+	border: 1px solid #666;
+	margin-top: 10px;
+	font-family: $main-content-text;
+}
+
+.favouritebtn-appear {
+	opacity: 0.01;
+}
+
+.favouritebtn-appear.favouritebtn-appear-active {
+  opacity: 1;
+  transition: opacity 400ms linear;
+}
+
+.favouritebtn-leave {
+	opacity: 1;
+}
+
+.favouritebtn-leave.favouritebtn-leave-active {
+  opacity: 0.01;
+	transition: opacity 400ms linear; 
+}

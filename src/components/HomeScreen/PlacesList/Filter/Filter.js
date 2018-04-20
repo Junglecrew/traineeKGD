@@ -8,10 +8,17 @@ class Filter extends Component {
 		filteredCategory: propTypes.number,
 		handleFilterChange: propTypes.func,
 		toggleFilterWindow: propTypes.func,
+		handleToggleFavouritesShow: propTypes.func,
 	}
 
 	render() {
-		const { categories, filteredCategory, toggleFilterWindow, handleFilterChange } = this.props
+		const {
+			categories,
+			filteredCategory,
+			toggleFilterWindow,
+			handleFilterChange,
+			handleToggleFavouritesShow,
+		} = this.props
 		return (
 			<div className="filter-screen">
 				<div className="filter-screen__header">
@@ -33,6 +40,9 @@ class Filter extends Component {
 							</div>
 						)
 					})}
+				</div>
+				<div className="favourite-points" onClick={() => handleToggleFavouritesShow()}>
+					Избранное
 				</div>
 			</div>
 		)

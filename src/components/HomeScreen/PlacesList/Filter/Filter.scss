@@ -70,6 +70,20 @@
 	}
 }
 
+.favourite-points {
+	width: 90%;
+	margin: 0 auto;
+	line-height: 30px;
+	&:before {
+		content:url('../../../../assets/svgs/ic_star.svg');
+		display: inline-block;
+		height: 30px;
+		width: 30px;
+		margin: 0 7px;
+	}
+}
+
+
 // Анимания окна с фильтром
 .filterwindow-enter {
 	opacity: 0.01;

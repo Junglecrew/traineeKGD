@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect'
 import { getFilteredCategory } from 'reducers/filter/selectors'
 import { getUserLocation } from 'reducers/location/selectors'
+import { getFavouriteList, showFavouriteList } from 'reducers/favourite/selectors'
 
 export const getIsFetching = state => state.content.isFetching
 export const getError = state => state.content.error
@@ -40,9 +41,11 @@ export const getPointsSortedByRange = createSelector(getContentPoints, getUserLo
 export const getFilteredPoints = createSelector(
 	getPointsSortedByRange,
 	getFilteredCategory,
-	(points, filteredCategories) => {
+	getFavouriteList,
+	showFavouriteList,
+	(points, filteredCategories, favourites, showFavouriteList) => {
 		if (!points) return null
-		console.log(points.filter(item => item.category_id.includes(filteredCategories)))
-		return points.filter(item => item.category_id.includes(filteredCategories))
+		if (filteredCategories !== null) return points.filter(item => item.category_id.includes(filteredCategories))
+		// if (showFavouriteList === true) return points.filter(item => favourites.indexOf(item.id))
 	},
 )

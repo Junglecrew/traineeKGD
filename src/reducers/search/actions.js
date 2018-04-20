@@ -1,5 +1,4 @@
 import * as types from './types'
-import { searchValue } from './selectors'
 
 export const searchInputShow = () => ({
 	type: types.SEARCH_INPUT_SHOW,

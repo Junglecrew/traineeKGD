@@ -61,8 +61,8 @@ class PointScreen extends Component {
 								<PointHeader id={category_id} />
 							</div>
 							<Rating rate={rate} />
-							<Favourite id={id} />
 						</div>
+						<Favourite id={id} />
 						<div className="point-title">{name}</div>
 						<div className="point-description">{description}</div>
 						<div className="point-schedule">

@@ -6,7 +6,6 @@ import filter from './filter/reducer'
 import favourite from './favourite/reducer'
 import search from './search/reducer'
 
-
 export default combineReducers({
 	content,
 	location,
