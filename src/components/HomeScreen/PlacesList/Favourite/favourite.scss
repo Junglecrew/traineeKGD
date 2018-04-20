@@ -1,13 +1,18 @@
 @import 'src/index.scss';
 
 .btn-favourite {
+	width: 190px;
 	border-radius: 2px;
 	outline: none;
 	padding: 5px;
-	background-color: #d9d9d9;
-	border: 1px solid #666;
+	background-color:#f33d41;
+	border: none;
 	margin-top: 10px;
 	font-family: $main-content-text;
+	div {
+		padding: 3px 12px;
+		color: #fff;
+	}
 }
 
 .favouritebtn-appear {

@@ -75,7 +75,7 @@ h3 {
 
 .filter-window-enter {
   opacity: 0.01;
-  transform: translateY(-100%); }
+  transform: translateY(100%); }
 
 .filter-window-enter.filter-window-enter-active {
   opacity: 1;
@@ -88,4 +88,4 @@ h3 {
 
 .filter-window-leave.filter-window-leave-active {
   transition: transform 400ms linear;
-  transform: translateY(-100%); }
+  transform: translateY(100%); }

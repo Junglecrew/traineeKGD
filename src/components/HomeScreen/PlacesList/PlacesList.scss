@@ -74,7 +74,7 @@
 
 .filter-window-enter {
 	opacity: 0.01;
-	transform: translateY(-100%)
+	transform: translateY(100%)
 }
 
 .filter-window-enter.filter-window-enter-active {
@@ -91,5 +91,5 @@
 .filter-window-leave.filter-window-leave-active {
   // opacity: 0.01;
 	transition: transform 400ms linear;
-	transform: translateY(-100%)
+	transform: translateY(100%)
 }
