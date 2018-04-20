@@ -7,9 +7,7 @@ import Rating from 'components/PointScreen/Rating'
 import Map from 'components/common/Map'
 import GalleryModal from 'components/PointScreen/GalleryModal'
 import Favourite from 'components/HomeScreen/PlacesList/Favourite'
-import Preloader from 'components/common/Preloader'
 import './PointScreen.css'
-
 
 class PointScreen extends Component {
 	static propTypes = {
@@ -118,7 +116,5 @@ class PointScreen extends Component {
 		)
 	}
 }
-
-
 
 export default PointScreen

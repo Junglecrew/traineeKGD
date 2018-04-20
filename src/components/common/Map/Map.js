@@ -3,7 +3,7 @@ import GoogleMapReact from 'google-map-react'
 import propTypes from 'prop-types'
 import locationLogo from '/assets/svgs/icLocation.svg'
 
-const Marker = ({ text }) => (
+const Marker = () => (
 	<div
 		style={{
 			position: 'relative',
@@ -14,9 +14,7 @@ const Marker = ({ text }) => (
 			right: -5,
 			background: `url(${locationLogo})`,
 		}}
-	>
-		{text}
-	</div>
+	/>
 )
 
 class Map extends Component {

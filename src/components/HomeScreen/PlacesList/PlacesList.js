@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import propTypes from 'prop-types'
 import Point from 'components/HomeScreen/PlacesList/Point'
 import Filter from 'components/HomeScreen/PlacesList/Filter'
 import Preloader from 'components/common/Preloader'
+import Search from 'components/HomeScreen/PlacesList/Search'
 import './PlacesList.css'
 import circleLogo from '/assets/img/icCircle@3x.png'
+import sad from '/assets/img/sad.png'
 
 class PlacesList extends Component {
 	static propTypes = {
@@ -15,6 +18,9 @@ class PlacesList extends Component {
 		contentThunk: propTypes.func.isRequired,
 		getUserPosition: propTypes.func,
 		toggleFilterWindow: propTypes.func,
+		searchValue: propTypes.string,
+		clearSearchForm: propTypes.func,
+		filteredPoints: propTypes.array,
 	}
 
 	componentDidMount() {
@@ -30,37 +36,51 @@ class PlacesList extends Component {
 
 	getFilterBar() {
 		const pointsBlock = document.getElementsByClassName('places-list')[0]
-		const filterBar = document.getElementsByClassName('filter-bar')[0]
+		const filterBar = document.getElementsByClassName('top-bar')[0]
 		if (pointsBlock) {
 			var trigger = pointsBlock.getBoundingClientRect().top
 		}
 		if (trigger < 200) {
 			filterBar.style.top = '0'
 		} else {
-			filterBar.style.top = '-70px'
+			filterBar.style.top = '-140px'
 		}
 	}
 
 	getPointsList() {
-		const { pointsList, filteredCategory } = this.props
-		const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory))
-		const context = filteredCategory === null ? pointsList : filteredPoints
-		const data = context.map(item => (
-			<div className="places-list__item" key={item.id}>
-				<Point data={item} />
-			</div>
-		))
+		const { pointsList, filteredCategory, searchValue, filteredPoints } = this.props
+		// const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory))
+		const context = (filteredCategory === null ? pointsList : filteredPoints).filter(
+			item =>
+				item.name.toLowerCase().search(searchValue) !== -1 || item.description.toLowerCase().search(searchValue) !== -1,
+		)
+		const data =
+			context.length === 0 ? (
+				<div className="empty-page">
+					<div>К сожалению, по Вашему запросу ничего не найдено</div>
+					<img className="empty-page__icon" src={sad} alt="Ничего не найдено" />
+				</div>
+			) : (
+				context.map(item => (
+					<div className="places-list__item" key={item.id}>
+						<Point data={item} />
+					</div>
+				))
+			)
 		return data
 	}
 
 	render() {
-		const { pointsList, showFilter, toggleFilterWindow } = this.props
+		const { pointsList, showFilter, toggleFilterWindow, clearSearchForm } = this.props
 		return (
 			<Fragment>
-				<div className="filter-bar">
-					<div className="filter-bar__content">
-						<div className="filter-bar__logo" />
+				<div className="top-bar">
+					<div className="top-bar__content">
+						<div className="top-bar__logo" />
 						<div onClick={() => toggleFilterWindow()}>Фильтровать места</div>
+					</div>
+					<div className="top-bar__search">
+						<Search />
 					</div>
 				</div>
 				<div>
@@ -74,11 +94,16 @@ class PlacesList extends Component {
 				</div>
 
 				{pointsList !== undefined ? (
-					<div className="places-list">
-						<div className="red-logo">
-							<img src={circleLogo} alt="Лого" />
+					<div>
+						<div className="places-list">
+							<div className="red-logo">
+								<img src={circleLogo} alt="Лого" />
+							</div>
+							{this.getPointsList()}
 						</div>
-						{this.getPointsList()}
+						<div className="clear" onClick={() => clearSearchForm()}>
+							Очистить поиск
+						</div>
 					</div>
 				) : (
 					<Preloader />

@@ -14,5 +14,4 @@ export const removePointFromFavourite = payload => ({
 export const handleClickFavourites = id => (dispatch, getState) => {
 	const state = getState()
 	isFavourite(state, id) ? dispatch(removePointFromFavourite(id)) : dispatch(addPointToFavourite(id))
-	// isFavourite(state, id) ? console.log("удаляем") : console.log("добавляем")
 }

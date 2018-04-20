@@ -1,0 +1,3 @@
+export const SEARCH = 'SEARCH'
+export const SEARCH_INPUT_SHOW = 'SEARCH_INPUT_SHOW'
+export const SEARCH_CLEAR = 'SEARCH_CLEAR'
