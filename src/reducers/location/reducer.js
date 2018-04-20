@@ -7,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case types.ADD_POINT_ADDRESS:
+		case types.LOCATION_ADD:
 			return {
 				...state,
 				pointsAddresses: {

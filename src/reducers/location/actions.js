@@ -2,7 +2,7 @@ import * as types from './types'
 import { doesAddressExist } from './selectors'
 
 export const addAddressToStore = payload => ({
-	type: types.ADD_POINT_ADDRESS,
+	type: types.LOCATION_ADD,
 	payload,
 })
 

@@ -17,7 +17,8 @@
   margin: 0 10px;
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
-  color: #64686a; }
+  color: #64686a;
+  border: 1px solid #64686a; }
 
 .searchinput-enter {
   opacity: 0.01;

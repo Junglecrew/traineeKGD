@@ -9,6 +9,7 @@ import { clearSearchForm, searchClear } from 'reducers/search/actions'
 import { getIsFetching, getFilteredPoints, getPointsSortedByRange } from 'reducers/content/selectors'
 import { getFilteredCategory, showFilter } from 'reducers/filter/selectors'
 import { searchValue } from 'reducers/search/selectors'
+import { getUserLocation } from 'reducers/location/selectors'
 
 const mapStateToProps = state => {
 	return {
@@ -18,6 +19,7 @@ const mapStateToProps = state => {
 		searchValue: searchValue(state),
 		pointsList: getPointsSortedByRange(state),
 		filteredPoints: getFilteredPoints(state),
+		getUserLocation: getUserLocation(state),
 	}
 }
 
