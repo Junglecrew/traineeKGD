@@ -15,6 +15,7 @@ export const getIsNeedUpdate = state =>
 	Number(new Date()) - getLastUpdate(state) > 1000 * 60 * 60 * 24
 
 export const getPointsSortedByRange = createSelector(getContentPoints, getUserLocation, (points, coords) => {
+	if (!points) return points
 	if (!coords) return points
 
 	const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -36,10 +37,12 @@ export const getPointsSortedByRange = createSelector(getContentPoints, getUserLo
 	)
 })
 
-export const getFilteredPoints = createSelector(getContentPoints, getFilteredCategory, (points, filteredCategories) => {
-	if (!points) return null
-	return points.filter(item => item.category_id.includes(filteredCategories))
-})
-
-//coords.lat
-//coords.lng
+export const getFilteredPoints = createSelector(
+	getPointsSortedByRange,
+	getFilteredCategory,
+	(points, filteredCategories) => {
+		if (!points) return null
+		console.log(points.filter(item => item.category_id.includes(filteredCategories)))
+		return points.filter(item => item.category_id.includes(filteredCategories))
+	},
+)

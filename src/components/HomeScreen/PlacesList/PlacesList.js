@@ -49,11 +49,14 @@ class PlacesList extends Component {
 
 	getPointsList() {
 		const { pointsList, filteredCategory, searchValue, filteredPoints } = this.props
-		// const filteredPoints = pointsList.filter(item => item.category_id.includes(filteredCategory))
+		console.log(filteredCategory)
+		console.log(searchValue)
+		console.log(filteredPoints)
 		const context = (filteredCategory === null ? pointsList : filteredPoints).filter(
 			item =>
 				item.name.toLowerCase().search(searchValue) !== -1 || item.description.toLowerCase().search(searchValue) !== -1,
 		)
+		console.log(context)
 		const data =
 			context.length === 0 ? (
 				<div className="empty-page">
