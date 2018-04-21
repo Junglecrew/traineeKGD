@@ -34,7 +34,7 @@ class Map extends Component {
 			scrollwheel: false,
 			draggable: false,
 			zoomControl: false,
-			fullscreenControl: false,
+			fullscreenControl: true,
 		}
 	}
 
