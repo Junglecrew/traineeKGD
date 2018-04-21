@@ -47,13 +47,13 @@ h3 {
 
 .point-title {
   font-weight: bold;
-  margin: 20px 0; }
+  margin: 12px 0; }
 
 .point-description {
-  margin: 20px 0;
   font-family: "Open Sans", sans-serif;
   font-size: 17px;
-  line-height: 22px; }
+  line-height: 24px;
+  margin-bottom: 16px; }
 
 .point-schedule {
   margin-bottom: 20px;
@@ -85,8 +85,8 @@ h3 {
     margin-top: 10px; }
 
 .point-phone {
+  height: 72px;
   display: flex;
-  margin-bottom: 20px;
   color: #64686a;
   font-family: "Open Sans", sans-serif; }
   .point-phone:after {
@@ -95,17 +95,22 @@ h3 {
     display: block;
     height: 1px; }
   .point-phone__number {
-    line-height: 28px; }
+    line-height: 72px;
+    text-decoration: none;
+    color: #64686a; }
   .point-phone:before {
     content: url("../../assets/svgs/icPhone.svg");
-    margin-right: 15px; }
+    margin-right: 15px;
+    line-height: 80px; }
 
 .point-location {
   display: flex;
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  height: 72px; }
   .point-location:before {
     content: url("../../assets/svgs/icLocation.svg");
-    margin-right: 15px; }
+    margin-right: 15px;
+    line-height: 72px; }
 
 #map {
   width: 100%;

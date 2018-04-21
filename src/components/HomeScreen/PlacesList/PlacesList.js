@@ -69,7 +69,7 @@ class PlacesList extends Component {
 	}
 
 	render() {
-		const { pointsList, showFilter, toggleFilterWindow, clearSearchForm } = this.props
+		const { pointsList, showFilter, toggleFilterWindow, clearSearchForm, searchValue } = this.props
 		return (
 			<Fragment>
 				<div className="top-bar">
@@ -99,9 +99,11 @@ class PlacesList extends Component {
 							</div>
 							{this.getPointsList()}
 						</div>
-						<div className="clear" onClick={() => clearSearchForm()}>
-							Очистить поиск
-						</div>
+						{searchValue && (
+							<div className="clear" onClick={() => clearSearchForm()}>
+								Очистить поиск
+							</div>
+						)}
 					</div>
 				) : (
 					<Preloader />

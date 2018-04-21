@@ -63,21 +63,27 @@ class PointScreen extends Component {
 							<Rating rate={rate} />
 						</div>
 						<Favourite id={id} />
-						<div className="point-title">{name}</div>
+						<h3 className="point-title">{name}</h3>
 						<div className="point-description">{description}</div>
-						<div className="point-schedule">
-							<span>Режим работы: </span>
-							{description_2}
-						</div>
-						<div className="point-prices">
-							<span>Стомость посещения: </span>
-							{cost_text}
-						</div>
-						<div className="point-phone">
-							<a href={`tel:${phone}`} className="point-phone__number">
-								{phone}
-							</a>
-						</div>
+						{description_2 && (
+							<div className="point-schedule">
+								<span>Режим работы: </span>
+								{description_2}
+							</div>
+						)}
+						{cost_text && (
+							<div className="point-prices">
+								<span>Стомость посещения: </span>
+								{cost_text}
+							</div>
+						)}
+						{phone && (
+							<div className="point-phone">
+								<a href={`tel:${phone}`} className="point-phone__number">
+									{phone}
+								</a>
+							</div>
+						)}
 						<div className="point-location">
 							<span className="point-location__text">{this.getAddress()}</span>
 						</div>
